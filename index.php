@@ -1,3 +1,24 @@
+<?php
+require('action/dbconnection.php');
+
+//Checken of SessionID cookie bestaat.
+if (isset($_COOKIE['SessionID'])) {
+    //TODO: beter checken naar potentiele injectie.
+    $session_ID_var = htmlspecialchars($_COOKIE['SessionID']);
+    //Checken of session bestaat dmv cookie hash.
+    $checkSessionQuery = "SELECT * FROM sessions WHERE cookie = '$session_ID_var'";
+    $checkSessionResult = $conn->prepare($checkSessionQuery);
+    $checkSessionResult->execute();
+    $number_of_rows = $checkSessionResult->fetchColumn();
+    // Checken of query is uitgevoerd && cookie in sessions tabel staat.
+    if ($checkSessionQuery && $number_of_rows != 0) {
+        header("Location: licenties.php");
+        die();
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +28,14 @@
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-4.4.1-dist/css/bootstrap.min.css">
 </head>
 <body class="text-center">
-<form class="form-signin" action="action.php?a=login" method="post">
+<form class="form-signin" action="action/action.php?a=login" method="post">
 
     <img class="mb-3" src="assets/images/NHLSTENDEN_LOGO.png" alt="NHL Stenden" width="160" height="125">
 
     <h1 class="h3 mb-3 font-weight-normal">Licentiebeheer</h1>
 
     <label for="inputEmail" class="sr-only">E-mail</label>
-    <input type="text" name="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
     <label for="inputPassword" class="sr-only">Wachtwoord</label>
     <input type="password" name="wachtwoord" id="inputPassword" class="form-control" placeholder="Wachtwoord" required>
 
