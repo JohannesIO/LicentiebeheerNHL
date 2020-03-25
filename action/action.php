@@ -10,6 +10,9 @@ if (!isset($_GET['a'])) {
 if($_GET['a'] == 'login'){
     Login();
 }
+if($_GET['a'] == 'logout'){
+    Logout();
+}
 
 function Login() {
     // $conn (databaseconnectie) importeren in deze functie, omdat hij buiten de scope staat
@@ -43,7 +46,7 @@ function Login() {
                 //Cookie daadwerkelijk aanmaken. 3600 seconden is 1 uur
                 setcookie('SessionID', $session_cookie_gen, time() + 3600, "/");
                 //Doorsturen naar licenties.php
-                header("Location: /licenties.php");
+                header("Location: /licentiebeheer/licenties.php");
                 die();
             }
             else {
@@ -54,4 +57,12 @@ function Login() {
         }
 
     }
+}
+
+function Logout() {
+    unset($_COOKIE['SessionID']);
+    setcookie('SessionID', null, -1, '/');
+    echo "gelukt";
+    header("Location: /licentiebeheer/index.php");
+    die();
 }
