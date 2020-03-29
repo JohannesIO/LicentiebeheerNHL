@@ -1,5 +1,26 @@
-<!doctype html>
-<html lang="en">
+<?php
+require('action/dbconnection.php');
+
+
+if (!empty($_POST['Toevoegen'])){
+
+
+	$licentienummer = $_POST['LCode'];
+	$vervaldatum = $_POST['LVerval'];
+	$hoofdgebruiker = $_POST['LHGebr'];
+	$licentienaam = $_POST['LNaam'];
+	$licentiebeschrijving = $_POST['LBeschr'];
+	$installatieuitleg = $_POST['LInstall'];
+
+	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg) 
+	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg')");
+	echo "<script>alert('it works')</script>";
+}
+
+
+?>
+
+<html>
 
 <head>
     <title>Licenties</title>
@@ -11,6 +32,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
+
+
 
 <body>
     <div class="container">
@@ -70,48 +94,48 @@
                     <tbody>
                     </tbody>
                 </table>
-                <form id="toevoegen">
+                <form action='licenties.php' method='post' id="toevoegen">
                     <div class="row">
                         <div class="form-group">
-                            <textarea class="form-control text-center" name="" id="" rows="1"
+                            <textarea class="form-control text-center" name="LNaam" id="" rows="1"
                                 placeholder="Naam Licentie"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <textarea class="form-control" name="" id="" rows="1"
+                                <textarea class="form-control" name="LDoelGroep" id="" rows="1"
                                     placeholder="Doelgroep"></textarea>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="" id="" rows="12"
+                                <textarea class="form-control" name="LBeschr" id="" rows="12"
                                     placeholder="Beschrijving"></textarea>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="" id="" rows="1"
+                                <textarea class="form-control" name="LVerval" id="" rows="1"
                                     placeholder="Vervaldatum"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <textarea class="form-control" name="" id="" rows="1"
+                                <textarea class="form-control" name="LHGebr" id="" rows="1"
                                     placeholder="Hoofdgebruiker"></textarea>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="" id="" rows="2"
+                                <textarea class="form-control" name="LCode" id="" rows="2"
                                     placeholder="Licentiecode"></textarea>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="" id="" rows="4"
+                                <textarea class="form-control" name="LVerleng" id="" rows="4"
                                     placeholder="Verleng uitleg"></textarea>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="" id="" rows="6"
+                                <textarea class="form-control" name="LInstall" id="" rows="6"
                                     placeholder="Installatie uitleg"></textarea>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" form="toevoegen" action="" class="btn btn-primary">Toevoegen</button>
+                    <button type="submit" form="toevoegen" name="Toevoegen" value="Nieuw" class="btn btn-primary">Toevoegen</button>
                 </form>
             </div>
         </div>
