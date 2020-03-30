@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 23/03/2020 17:19:33
+ Date: 30/03/2020 16:48:17
 */
 
 SET NAMES utf8mb4;
@@ -28,11 +28,12 @@ CREATE TABLE `gebruikers`  (
   `wachtwoord` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `isAdmin` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gebruikers
 -- ----------------------------
+INSERT INTO `gebruikers` VALUES (1, 'test@test.com', 'test', 'test', '0');
 
 -- ----------------------------
 -- Table structure for licenties
@@ -40,18 +41,32 @@ CREATE TABLE `gebruikers`  (
 DROP TABLE IF EXISTS `licenties`;
 CREATE TABLE `licenties`  (
   `licentieid` int(11) NOT NULL AUTO_INCREMENT,
-  `licentienummer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `licentienummer` int(255) NOT NULL,
   `vervaldatum` date NULL DEFAULT NULL,
   `hoofdgebruiker` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `licentienaam` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `licentiebeschrijving` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `installatieuitleg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`licentieid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of licenties
 -- ----------------------------
+INSERT INTO `licenties` VALUES (1, 1, '0000-00-00', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (2, 2, '0000-00-00', 'afdeling ict', 'Facebook', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (3, 3, '0000-00-00', 'afdeling ict', 'Tumblr', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (4, 4, '0000-00-00', 'afdeling ict', 'LinkedIn', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (5, 5, '0000-00-00', 'afdeling ict', 'MySpace', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (6, 6, '0000-00-00', 'afdeling ict', 'Hyves', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (7, 7, '0000-00-00', 'afdeling ict', 'Habbo', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (8, 8, '0000-00-00', 'afdeling ict', 'Google Agenda', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (9, 9, '0000-00-00', 'afdeling ict', 'PHPStorm', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (10, 10, '0000-00-00', 'afdeling ict', 'XAMPP', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (11, 11, '0000-00-00', 'afdeling ict', 'CMD', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (12, 12, '0000-00-00', 'afdeling ict', 'Microsoft Word', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (13, 13, '0000-00-00', 'afdeling ict', 'Microsoft Teamsssssssssssssss', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (23, 86, '0000-00-00', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1');
 
 -- ----------------------------
 -- Table structure for sessions
@@ -63,7 +78,7 @@ CREATE TABLE `sessions`  (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `cookie` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sessions
