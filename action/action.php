@@ -19,6 +19,11 @@ if($_GET['a'] == 'toevoegen'){
 if($_GET['a'] == 'select'){
     Select();
 }
+if($_GET['a'] == 'delete'){
+    Delete();
+}
+
+
 
 function Login() {
     // $conn (databaseconnectie) importeren in deze functie, omdat hij buiten de scope staat
@@ -96,6 +101,15 @@ function Select() {
 	$_GET['licentieID'];
 	$_SESSION['LicentieID'] = $_GET['licentieID'];
 	
+	header("Location: /licentiebeheer/licenties.php");
+	die();
+}
+
+function Delete() {
+	require("dbconnection.php");
+	session_start();
+	$licentieid = $_SESSION['LicentieID'];
+	$conn->exec("DELETE FROM licenties WHERE licentieid=$licentieid");
 	header("Location: /licentiebeheer/licenties.php");
 	die();
 }

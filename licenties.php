@@ -23,23 +23,13 @@ else {
     die();
 }
 
-//if (!empty($_POST['Toevoegen'])){
-
-    //TODO: Je kan niet niet-gecheckte variabelen in je database zetten.
-
-//	$licentienummer = $_POST['LCode'];
-//	$vervaldatum = $_POST['LVerval'];
-//	$hoofdgebruiker = $_POST['LHGebr'];
-//	$licentienaam = $_POST['LNaam'];
-//	$licentiebeschrijving = $_POST['LBeschr'];
-//	$installatieuitleg = $_POST['LInstall'];
-
-//	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg) 
-//	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg')");
-//	echo "<script>alert('licentie toegevoegd')</script>";
-//}
 
 session_start();
+
+if (empty($_SESSION['LicentieID']))
+	$_SESSION['LicentieID'] = 0;
+$licentie = $conn->query("SELECT * FROM licenties WHERE licentieid=".$_SESSION['LicentieID']."");
+$licentieSel = $licentie->fetch();
 
 ?>
 
@@ -110,26 +100,19 @@ session_start();
             <div class="col-sm-8">
                 <div class="row">
                     <button type="button" class="btn btn-outline-primary" style="margin: 5px">Bijwerken</button>
-                    <button type="button" class="btn btn-danger" style="margin: 5px">Verwijderen</button>
+
+					<form class="form-signin" action="action/action.php?a=delete" method="post" style="margin: 5px">
+                        <input type="submit" class="btn btn-danger" style="margin: 5px" value="Verwijderen" name="delete_button"  />
+                    </form>
+
                     <form class="form-signin" action="action/action.php?a=logout" method="post" style="margin: 5px">
-                        <input type="submit" class="btn btn-primary" value="Logout" name="logout_button"  />
+                        <input type="submit" class="btn btn-primary" style="margin: 5px" value="Logout" name="logout_button"  />
                     </form>
 
                     <label style="margin: 5px">Binnenkort verloopt: Licentie X en Licentie Y</label>
 
 
                 </div>
-
-				
-
-				<?php
-				if (empty($_SESSION['LicentieID']))
-					$_SESSION['LicentieID'] = 1;
-				$licentie = $conn->query("SELECT * FROM licenties WHERE licentieid=".$_SESSION['LicentieID']."");
-				$licentieSel = $licentie->fetch();
-				
-				
-				?>
 
                 <table class="table table-bordered">
                     <thead>
