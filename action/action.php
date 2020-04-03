@@ -13,6 +13,9 @@ if($_GET['a'] == 'login'){
 if($_GET['a'] == 'logout'){
     Logout();
 }
+if($_GET['a'] == 'select'){
+    Select();
+}
 
 function Login() {
     // $conn (databaseconnectie) importeren in deze functie, omdat hij buiten de scope staat
@@ -64,4 +67,14 @@ function Logout() {
     echo "gelukt";
     header("Location: /licentiebeheer/index.php");
     die();
+}
+
+
+function Select() {
+	session_start();
+	$_GET['licentieID'];
+	$_SESSION['LicentieID'] = $_GET['licentieID'];
+	
+	header("Location: /licentiebeheer/licenties.php");
+	die();
 }
