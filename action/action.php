@@ -30,7 +30,6 @@ function Login() {
             $login_wachtwoord = filter_var($_POST["wachtwoord"], FILTER_SANITIZE_STRING);
             // Checken of ingevulde email en wachtwoord in de database staan.
             $login_query = "SELECT * FROM gebruikers WHERE email = '$login_email' AND wachtwoord = '$login_wachtwoord'";
-
             $login_result = $conn->prepare($login_query);
             $login_result->execute();
             $number_of_rows = $login_result->fetchColumn();
