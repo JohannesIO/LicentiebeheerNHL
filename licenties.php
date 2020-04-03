@@ -23,21 +23,21 @@ else {
     die();
 }
 
-if (!empty($_POST['Toevoegen'])){
+//if (!empty($_POST['Toevoegen'])){
 
     //TODO: Je kan niet niet-gecheckte variabelen in je database zetten.
 
-	$licentienummer = $_POST['LCode'];
-	$vervaldatum = $_POST['LVerval'];
-	$hoofdgebruiker = $_POST['LHGebr'];
-	$licentienaam = $_POST['LNaam'];
-	$licentiebeschrijving = $_POST['LBeschr'];
-	$installatieuitleg = $_POST['LInstall'];
+//	$licentienummer = $_POST['LCode'];
+//	$vervaldatum = $_POST['LVerval'];
+//	$hoofdgebruiker = $_POST['LHGebr'];
+//	$licentienaam = $_POST['LNaam'];
+//	$licentiebeschrijving = $_POST['LBeschr'];
+//	$installatieuitleg = $_POST['LInstall'];
 
-	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg) 
-	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg')");
-	echo "<script>alert('licentie toegevoegd')</script>";
-}
+//	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg) 
+//	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg')");
+//	echo "<script>alert('licentie toegevoegd')</script>";
+//}
 
 session_start();
 
@@ -89,6 +89,7 @@ session_start();
                                       <script>
 												$('#" . $licentieID . "').click(function() {
 													$.get('action/action.php?a=select&licentieID=" . $licentieID . "')
+													
 													location.reload();
                                                 });
                                       </script>      
@@ -163,7 +164,7 @@ session_start();
                     <tbody>
                     </tbody>
                 </table>
-                <form action='licenties.php' method='post' id="toevoegen">
+                <form action="action/action.php?a=toevoegen" method='post' id="toevoegen">
                     <div class="row">
                         <div class="form-group">
                             <textarea class="form-control text-center" name="LNaam" id="" rows="1"
