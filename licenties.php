@@ -51,6 +51,21 @@ $licentieSel = $licentie->fetch();
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">Licentiebeheer.</a>&nbsp; &nbsp; &nbsp;
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home.</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Account beheren.</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="action/action.php?a=logout">Logout.</a>
+            </li>
+        </ul>
+    </nav>
+    <br />
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
@@ -93,20 +108,15 @@ $licentieSel = $licentie->fetch();
                     <button type="button" class="btn btn-success btn-block" style="margin: 5px">Licentie
                         toevoegen</button>
                 </div>
-                <div class="row">
-                    <button type="button" class="btn btn-primary btn-block" style="margin: 5px">Account beheren</button>
-                </div>
             </div>
             <div class="col-sm-8">
                 <div class="row">
-                    <button type="button" class="btn btn-outline-primary" style="margin: 5px">Bijwerken</button>
+                    <form class="form-signin" action="" method="post" style="margin: 5px">
+                        <input type="submit" class="btn btn-info" style="margin: 5px" value="Bijwerken" name="bijwerk_button"  />
+                    </form>
 
 					<form class="form-signin" action="action/action.php?a=delete" method="post" style="margin: 5px">
                         <input type="submit" class="btn btn-danger" style="margin: 5px" value="Verwijderen" name="delete_button"  />
-                    </form>
-
-                    <form class="form-signin" action="action/action.php?a=logout" method="post" style="margin: 5px">
-                        <input type="submit" class="btn btn-primary" style="margin: 5px" value="Logout" name="logout_button"  />
                     </form>
 
                     <label style="margin: 5px">Binnenkort verloopt: Licentie X en Licentie Y</label>
