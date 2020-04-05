@@ -23,21 +23,14 @@ else {
     die();
 }
 
-if (!empty($_POST['Toevoegen'])){
 
-    //TODO: Je kan niet niet-gecheckte variabelen in je database zetten.
+session_start();
 
-	$licentienummer = $_POST['LCode'];
-	$vervaldatum = $_POST['LVerval'];
-	$hoofdgebruiker = $_POST['LHGebr'];
-	$licentienaam = $_POST['LNaam'];
-	$licentiebeschrijving = $_POST['LBeschr'];
-	$installatieuitleg = $_POST['LInstall'];
+if (empty($_SESSION['LicentieID']))
+	$_SESSION['LicentieID'] = 0;
+$licentie = $conn->query("SELECT * FROM licenties WHERE licentieid=".$_SESSION['LicentieID']."");
+$licentieSel = $licentie->fetch();
 
-	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg) 
-	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg')");
-	echo "<script>alert('licentie toegevoegd')</script>";
-}
 ?>
 
 <html>
@@ -52,8 +45,8 @@ if (!empty($_POST['Toevoegen'])){
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
@@ -76,15 +69,18 @@ if (!empty($_POST['Toevoegen'])){
                         <?php
                             $licenties = $conn->query("SELECT * FROM licenties");
                             while($row = $licenties->fetch()) {
+                                $licentieID = $row[0];
                                 $licentieNummer = $row[1];
                                 echo "
-                                            <tr class='licentieTable' id=" . $licentieNummer . ">
-                                            <td>" . $row[4] . "</form></td>
+                                            <tr class='licentieTable' id=" . $licentieID . ">
+                                            <td >" . $row[4] . "</form></td>
                                             </tr>                               
                                       
                                       <script>
-                                                $('#" . $licentieNummer . "').click(function() {
-                                                    alert(" . $licentieNummer . ");
+												$('#" . $licentieID . "').click(function() {
+													$.get('action/action.php?a=select&licentieID=" . $licentieID . "')
+													
+													location.reload();
                                                 });
                                       </script>      
                                      ";
@@ -104,41 +100,54 @@ if (!empty($_POST['Toevoegen'])){
             <div class="col-sm-8">
                 <div class="row">
                     <button type="button" class="btn btn-outline-primary" style="margin: 5px">Bijwerken</button>
-                    <button type="button" class="btn btn-danger" style="margin: 5px">Verwijderen</button>
+
+					<form class="form-signin" action="action/action.php?a=delete" method="post" style="margin: 5px">
+                        <input type="submit" class="btn btn-danger" style="margin: 5px" value="Verwijderen" name="delete_button"  />
+                    </form>
+
                     <form class="form-signin" action="action/action.php?a=logout" method="post" style="margin: 5px">
-                        <input type="submit" class="btn btn-primary" value="Logout" name="logout_button"  />
+                        <input type="submit" class="btn btn-primary" style="margin: 5px" value="Logout" name="logout_button"  />
                     </form>
 
                     <label style="margin: 5px">Binnenkort verloopt: Licentie X en Licentie Y</label>
 
 
                 </div>
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="2" class="text-center">Naam licentie</th>
+                            <th colspan="2" class="text-center">Naam licentie <br>
+							<?php echo $licentieSel['licentienaam'] ?></th>
                         </tr>
                         <tr>
-                            <th>Doelgroep</th>
-                            <th>Hoofdgebruiker</th>
+                            <th>Doelgroep <br>
+							<?php echo $licentieSel['doelgroep'] ?></th>
+                            <th>Hoofdgebruiker <br>
+							<?php echo $licentieSel['hoofdgebruiker'] ?></th>
                         </tr>
                         <tr>
-                            <th rowspan="2">Beschrijving</th>
-                            <th>Licentiecode</th>
+                            <th rowspan="2">Beschrijving <br>
+							<?php echo $licentieSel['licentiebeschrijving'] ?></th>
+                            <th>Licentiecode <br>
+							<?php echo $licentieSel['licentienummer'] ?></th>
                         </tr>
                         <tr>
-                            <th>Verleng uitleg</th>
+                            <th>Verleng uitleg <br>
+							<?php echo $licentieSel['verlenguitleg'] ?></th>
                         </tr>
                         <tr>
-                            <th>Vervaldatum</th>
-                            <th>Installatie uitleg</th>
+                            <th>Vervaldatum <br>
+							<?php echo $licentieSel['vervaldatum'] ?></th>
+                            <th>Installatie uitleg <br>
+							<?php echo $licentieSel['installatieuitleg'] ?></th>
                         </tr>
 
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
-                <form action='licenties.php' method='post' id="toevoegen">
+                <form action="action/action.php?a=toevoegen" method='post' id="toevoegen">
                     <div class="row">
                         <div class="form-group">
                             <textarea class="form-control text-center" name="LNaam" id="" rows="1"
@@ -157,7 +166,7 @@ if (!empty($_POST['Toevoegen'])){
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="LVerval" id="" rows="1"
-                                    placeholder="Vervaldatum"></textarea>
+                                    placeholder="yyyy-mm-dd"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">

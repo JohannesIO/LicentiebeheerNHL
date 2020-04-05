@@ -13,6 +13,17 @@ if($_GET['a'] == 'login'){
 if($_GET['a'] == 'logout'){
     Logout();
 }
+if($_GET['a'] == 'toevoegen'){
+    Toevoegen();
+}
+if($_GET['a'] == 'select'){
+    Select();
+}
+if($_GET['a'] == 'delete'){
+    Delete();
+}
+
+
 
 function Login() {
     // $conn (databaseconnectie) importeren in deze functie, omdat hij buiten de scope staat
@@ -64,4 +75,41 @@ function Logout() {
     echo "gelukt";
     header("Location: /licentiebeheer/index.php");
     die();
+}
+
+function Toevoegen() {
+	require("dbconnection.php");
+    //TODO: Je kan niet niet-gecheckte variabelen in je database zetten.
+
+	$licentienummer = $_POST['LCode'];
+	$vervaldatum = $_POST['LVerval'];
+	$hoofdgebruiker = $_POST['LHGebr'];
+	$licentienaam = $_POST['LNaam'];
+	$licentiebeschrijving = $_POST['LBeschr'];
+	$installatieuitleg = $_POST['LInstall'];
+
+	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg) 
+	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg')");
+	echo "<script>alert('licentie toegevoegd')</script>";
+	header("Location: /licentiebeheer/licenties.php");
+	die();
+}
+
+
+function Select() {
+	session_start();
+	$_GET['licentieID'];
+	$_SESSION['LicentieID'] = $_GET['licentieID'];
+	
+	header("Location: /licentiebeheer/licenties.php");
+	die();
+}
+
+function Delete() {
+	require("dbconnection.php");
+	session_start();
+	$licentieid = $_SESSION['LicentieID'];
+	$conn->exec("DELETE FROM licenties WHERE licentieid=$licentieid");
+	header("Location: /licentiebeheer/licenties.php");
+	die();
 }
