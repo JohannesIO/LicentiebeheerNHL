@@ -72,7 +72,6 @@ function Login() {
 function Logout() {
     unset($_COOKIE['SessionID']);
     setcookie('SessionID', null, -1, '/');
-    echo "gelukt";
     header("Location: /licentiebeheer/index.php");
     die();
 }

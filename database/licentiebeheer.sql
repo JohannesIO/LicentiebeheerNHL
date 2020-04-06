@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 30/03/2020 16:48:17
+ Date: 05/04/2020 14:53:47
 */
 
 SET NAMES utf8mb4;
@@ -47,26 +47,28 @@ CREATE TABLE `licenties`  (
   `licentienaam` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `licentiebeschrijving` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `installatieuitleg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `doelgroep` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `verlenguitleg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`licentieid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of licenties
 -- ----------------------------
-INSERT INTO `licenties` VALUES (1, 1, '0000-00-00', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (2, 2, '0000-00-00', 'afdeling ict', 'Facebook', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (3, 3, '0000-00-00', 'afdeling ict', 'Tumblr', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (4, 4, '0000-00-00', 'afdeling ict', 'LinkedIn', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (5, 5, '0000-00-00', 'afdeling ict', 'MySpace', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (6, 6, '0000-00-00', 'afdeling ict', 'Hyves', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (7, 7, '0000-00-00', 'afdeling ict', 'Habbo', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (8, 8, '0000-00-00', 'afdeling ict', 'Google Agenda', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (9, 9, '0000-00-00', 'afdeling ict', 'PHPStorm', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (10, 10, '0000-00-00', 'afdeling ict', 'XAMPP', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (11, 11, '0000-00-00', 'afdeling ict', 'CMD', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (12, 12, '0000-00-00', 'afdeling ict', 'Microsoft Word', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (13, 13, '0000-00-00', 'afdeling ict', 'Microsoft Teamsssssssssssssss', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (23, 86, '0000-00-00', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (1, 1, '0000-00-00', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (2, 2, '0000-00-00', 'afdeling ict', 'Facebook', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (3, 3, '0000-00-00', 'afdeling ict', 'Tumblr', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (4, 4, '0000-00-00', 'afdeling ict', 'LinkedIn', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (5, 5, '0000-00-00', 'afdeling ict', 'MySpace', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (6, 6, '0000-00-00', 'afdeling ict', 'Hyves', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (7, 7, '0000-00-00', 'afdeling ict', 'Habbo', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (8, 8, '0000-00-00', 'afdeling ict', 'Google Agenda', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (9, 9, '0000-00-00', 'afdeling ict', 'PHPStorm', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (10, 10, '0000-00-00', 'afdeling ict', 'XAMPP', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (11, 11, '0000-00-00', 'afdeling ict', 'CMD', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (12, 12, '0000-00-00', 'afdeling ict', 'Microsoft Word', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (23, 86, '0000-00-00', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
+INSERT INTO `licenties` VALUES (24, 0, '0000-00-00', 'Julian', 'Julian', 'Julian', 'Julian', 'Toegepaste Psychologie', 'dit is een verlenguitleg');
 
 -- ----------------------------
 -- Table structure for sessions
@@ -78,10 +80,12 @@ CREATE TABLE `sessions`  (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `cookie` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
+INSERT INTO `sessions` VALUES (18, '', 'test@test.com', '508c72f08a09c4c1d3439642cdf95c9895948eb1');
+INSERT INTO `sessions` VALUES (19, '', 'test@test.com', '3e90886657942387410c38091d5b46ffb287c216');
 
 SET FOREIGN_KEY_CHECKS = 1;
