@@ -122,7 +122,7 @@ $licentieSel = $licentie->fetch();
                         </tr>
                         <tr>
                             <th>Doelgroep <br>
-							<?php echo $licentieSel['doelgroep'] ?></th>
+							<?php echo 'niet in DB' ?></th>
                             <th>Hoofdgebruiker <br>
 							<?php echo $licentieSel['hoofdgebruiker'] ?></th>
                         </tr>
@@ -134,7 +134,7 @@ $licentieSel = $licentie->fetch();
                         </tr>
                         <tr>
                             <th>Verleng uitleg <br>
-							<?php echo $licentieSel['verlenguitleg'] ?></th>
+							<?php echo 'niet in DB' ?></th>
                         </tr>
                         <tr>
                             <th>Vervaldatum <br>
