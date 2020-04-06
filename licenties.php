@@ -17,6 +17,11 @@ if (isset($_COOKIE['SessionID'])) {
         header("Location: index.php");
         die();
     }
+    else {
+        // Userdata verkrijgen.
+        $checkSessionResult->execute();
+        $userData = $checkSessionResult->fetch();
+    }
 }
 else {
     header("Location: index.php");
@@ -52,8 +57,9 @@ $licentieSel = $licentie->fetch();
 
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">Licentiebeheer.</a>&nbsp; &nbsp; &nbsp;
-        <ul class="navbar-nav">
+        <a class="navbar-brand" href="#">Licentiebeheer.</a>
+        <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home.</a>
             </li>
@@ -64,12 +70,16 @@ $licentieSel = $licentie->fetch();
                 <a class="nav-link" href="action/action.php?a=logout">Logout.</a>
             </li>
         </ul>
+        <span class="navbar-text">
+        Welkom <b><?php echo $userData['gebruikersnaam'];  ?></b>.
+        </span>
+        </div>
+
     </nav>
     <br />
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-
                 <table class="table table-hover" id="licentieTable">
                     <thead class="thead-dark">
                     <tr>

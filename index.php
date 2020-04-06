@@ -16,7 +16,8 @@ if (isset($_COOKIE['SessionID'])) {
         die();
     }
 }
-
+$ww = 'test';
+echo password_hash($ww, PASSWORD_DEFAULT);
 ?>
 
 <!DOCTYPE html>

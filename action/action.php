@@ -40,24 +40,31 @@ function Login() {
             $login_email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
             $login_wachtwoord = filter_var($_POST["wachtwoord"], FILTER_SANITIZE_STRING);
             // Checken of ingevulde email en wachtwoord in de database staan.
-            $login_query = "SELECT * FROM gebruikers WHERE email = '$login_email' AND wachtwoord = '$login_wachtwoord'";
-            $login_result = $conn->prepare($login_query);
-            $login_result->execute();
-            $number_of_rows = $login_result->fetchColumn();
-            // Checken of query is uitgevoerd && user in de database staat.
-            if ($login_query && $number_of_rows != 0) {
-                //Cookie aanmaken met een gegenereerde code, om zo overal te kunnen checken of de gebruiker wel ingelogd is d.m.v. de cookiehash en de database te checken.
-                $session_cookie_gen = sha1( microtime() . $login_email . rand(111111, 999999)); // milliseconden + username en een willekeurig getal tussen 111111 en 999999 gecodeerd in sha1.
-                // Cookie in database plaatsen.
-                // TODO: gebruikersnaam ook in session plaatsen.
-                $session_query = "INSERT INTO sessions (`email`, `cookie`) VALUES ('$login_email', '$session_cookie_gen')";
-                $session_result = $conn->prepare($session_query);
-                $session_result->execute();
-                //Cookie daadwerkelijk aanmaken. 3600 seconden is 1 uur
-                setcookie('SessionID', $session_cookie_gen, time() + 3600, "/");
-                //Doorsturen naar licenties.php
-                header("Location: /licentiebeheer/licenties.php");
-                die();
+            $login_query = $conn->prepare("SELECT * FROM gebruikers WHERE email = '$login_email'");
+            $login_query->execute();
+            $number_of_rows = $login_query->fetchColumn();
+            if($login_query && $number_of_rows != 0) {
+                $login_query->execute();
+                $login_result = $login_query->fetch();
+                $getHashedPassword = $login_result['wachtwoord'];
+                if(password_verify($login_wachtwoord, $getHashedPassword)) {
+                    $login_gebruikersnaam = $login_result['gebruikersnaam'];
+                    //Cookie aanmaken met een gegenereerde code, om zo overal te kunnen checken of de gebruiker wel ingelogd is d.m.v. de cookiehash en de database te checken.
+                    $session_cookie_gen = sha1( microtime() . $login_email . rand(111111, 999999)); // milliseconden + username en een willekeurig getal tussen 111111 en 999999 gecodeerd in sha1.
+                    // Cookie in database plaatsen.
+                    // TODO: gebruikersnaam ook in session plaatsen.
+                    $session_query = "INSERT INTO sessions (`gebruikersnaam`, `email`,  `cookie`) VALUES ('$login_gebruikersnaam', '$login_email',  '$session_cookie_gen')";
+                    $session_result = $conn->prepare($session_query);
+                    $session_result->execute();
+                    //Cookie daadwerkelijk aanmaken. 3600 seconden is 1 uur
+                    setcookie('SessionID', $session_cookie_gen, time() + 3600, "/");
+                    //Doorsturen naar licenties.php
+                    header("Location: /licentiebeheer/licenties.php");
+                    die();
+                }
+                else {
+                    echo "password verify niet gelukt";
+                }
             }
             else {
                 echo "Onjuiste inloggegevens, <br/> <a href='/licentiebeheer/index.php'>Klik hier om terug te gaan.</a>";
