@@ -63,7 +63,7 @@ $licentieSel = $licentie->fetch();
 
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">Licentiebeheer.</a>
+        <a class="navbar-brand" href="licenties.php">Licentiebeheer.</a>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -76,7 +76,7 @@ $licentieSel = $licentie->fetch();
                     <a class="nav-link" href="action/action.php?a=logout">Logout.</a>
                 </li>
             </ul>
-            <span class="navbar-text">
+            <span class="navbar-text" style="cursor: default;">
                 Welkom <b><?php echo $userData['gebruikersnaam'];  ?></b>.
             </span>
         </div>
@@ -123,7 +123,7 @@ $licentieSel = $licentie->fetch();
 
                 <div class="row">
                     <button type="button" class="btn btn-success btn-block" id="hide" style="margin: 5px">Licentie
-                        toevoegen</button>
+                        toevoegen in/uitklappen</button>
                 </div>
             </div>
             <div class="col-sm-8">
@@ -143,7 +143,7 @@ $licentieSel = $licentie->fetch();
 
                 </div>
 
-                <table class="table table-bordered" id="licentieTable">
+                <table class="table table-bordered" id="licentieDisplay">
                     <thead>
                         <tr>
                             <th colspan="2" class="text-center">Naam licentie <br>
@@ -177,10 +177,10 @@ $licentieSel = $licentie->fetch();
                     </tbody>
                 </table>
                 <form action="action/action.php?a=toevoegen" method='post' id="toevoegen">
-                    <div class="row">
+                    <div class="row-">
                         <div class="form-group">
                             <textarea class="form-control text-center" name="LNaam" id="" rows="1"
-                                placeholder="Naam Licentie"></textarea>
+                                placeholder="Naam Licentie" required></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -194,8 +194,8 @@ $licentieSel = $licentie->fetch();
                                     placeholder="Beschrijving"></textarea>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="LVerval" id="" rows="1"
-                                    placeholder="yyyy-mm-dd"></textarea>
+                                <input class="form-control" type="date" name="LVerval" id="LVerval" rows="1"
+                                    title="Verval datum" data-toggle="tooltip" />
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -205,7 +205,7 @@ $licentieSel = $licentie->fetch();
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="LCode" id="" rows="2"
-                                    placeholder="Licentiecode"></textarea>
+                                    placeholder="Licentiecode" required></textarea>
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="LVerleng" id="" rows="4"
@@ -230,6 +230,7 @@ $licentieSel = $licentie->fetch();
                 var hideBool = true;
                 var toevoegen = $("#toevoegen");
                 var licentieTable = $("#licentieTable");
+                var licentieDisplay = $("#licentieDisplay");
 
                 $(hideElements);
 
@@ -241,14 +242,17 @@ $licentieSel = $licentie->fetch();
                 function hideElements() {
                     if (hideBool == true) {
                         $(toevoegen).hide();
+                        $(licentieDisplay).show();
                         $(licentieTable).show();
                     }
                     else {
                         $(licentieTable).hide();
+                        $(licentieDisplay).hide();
                         $(toevoegen).show();
                     }
                 }
 
+                $('#LVerval').tooltip();
             });
 
         </script>

@@ -41,7 +41,7 @@ if (isset($_COOKIE['SessionID'])) {
     <input type="submit" class="btn btn-lg btn-primary btn-block" name="login_submit" value="Inloggen">
 
     <!--<a href="wachwoordvergeten.php">Wachtwoord vergeten?</a><br />-->
-    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+    <p class="mt-5 mb-3 text-muted">Groep 22 &copy; 2020</p>
 </form>
 </body>
 </html>
