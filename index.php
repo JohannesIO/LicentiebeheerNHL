@@ -25,6 +25,8 @@ if (isset($_COOKIE['SessionID'])) {
     <link rel="stylesheet" type="text/css" href="assets/stylesheet/signin_stylesheet.css">
     <!-- Bootstrap CSS importeren. -->
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body class="text-center">
 <form class="form-signin" action="action/action.php?a=login" method="post">

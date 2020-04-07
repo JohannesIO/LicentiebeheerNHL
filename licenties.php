@@ -46,6 +46,8 @@ $licentieSel = $licentie->fetch();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="assets/stylesheet/stylesheet.css">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Bootstrap CSS importeren. -->
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <!-- Optional JavaScript -->
@@ -59,6 +61,29 @@ $licentieSel = $licentie->fetch();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script>
+        function zoekFunctie() {
+            // Variabelen verklaren
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("zoekenInput");
+            // toUpperCase om het niet hoofdlettergevoelig te maken
+            filter = input.value.toUpperCase();
+            table = document.getElementById("licentieTable");
+            tr = table.getElementsByTagName("tr");
+            // Door alle table rows loopen met for lus, en de rows niet laten zien welke niet aan de zoek query voldoen
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -94,8 +119,8 @@ $licentieSel = $licentie->fetch();
                     </thead>
                     <div class="form-group">
                         <label for=""></label>
-                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                            placeholder="Licentie zoeken... [WIP]">
+                        <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput" aria-describedby="helpId"
+                            placeholder="Licenties zoeken..." />
                     </div>
                     <tbody>
                         <?php
@@ -253,6 +278,8 @@ $licentieSel = $licentie->fetch();
                 }
 
                 $('#LVerval').tooltip();
+
+
             });
 
         </script>
