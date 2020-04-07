@@ -50,29 +50,35 @@ $licentieSel = $licentie->fetch();
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="#">Licentiebeheer.</a>
         <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home.</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Account beheren.</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="action/action.php?a=logout">Logout.</a>
-            </li>
-        </ul>
-        <span class="navbar-text">
-        Welkom <b><?php echo $userData['gebruikersnaam'];  ?></b>.
-        </span>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home.</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Account beheren.</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="action/action.php?a=logout">Logout.</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                Welkom <b><?php echo $userData['gebruikersnaam'];  ?></b>.
+            </span>
         </div>
 
     </nav>
@@ -82,13 +88,14 @@ $licentieSel = $licentie->fetch();
             <div class="col-sm-4">
                 <table class="table table-hover" id="licentieTable">
                     <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Licenties</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Licenties</th>
+                        </tr>
                     </thead>
                     <div class="form-group">
                         <label for=""></label>
-                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Licentie zoeken... [WIP]">
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                            placeholder="Licentie zoeken... [WIP]">
                     </div>
                     <tbody>
                         <?php
@@ -102,12 +109,12 @@ $licentieSel = $licentie->fetch();
                                             </tr>                               
                                       
                                       <script>
-												$('#" . $licentieID . "').click(function() {
-													$.get('action/action.php?a=select&licentieID=" . $licentieID . "')
-													
-													location.reload();
-                                                });
-                                      </script>      
+                                        $('#" . $licentieID . "').click(function () {
+                                            $.get('action/action.php?a=select&licentieID=" . $licentieID . "')
+
+                                            location.reload();
+                                        });
+                                    </script>      
                                      ";
                             }
                         ?>
@@ -115,18 +122,20 @@ $licentieSel = $licentie->fetch();
                 </table>
 
                 <div class="row">
-                    <button type="button" class="btn btn-success btn-block" style="margin: 5px">Licentie
+                    <button type="button" class="btn btn-success btn-block" id="hide" style="margin: 5px">Licentie
                         toevoegen</button>
                 </div>
             </div>
             <div class="col-sm-8">
                 <div class="row">
                     <form class="form-signin" action="" method="post" style="margin: 5px">
-                        <input type="submit" class="btn btn-info" style="margin: 5px" value="Bijwerken" name="bijwerk_button"  />
+                        <input type="submit" class="btn btn-info" style="margin: 5px" value="Bijwerken"
+                            name="bijwerk_button" />
                     </form>
 
-					<form class="form-signin" action="action/action.php?a=delete" method="post" style="margin: 5px">
-                        <input type="submit" class="btn btn-danger" style="margin: 5px" value="Verwijderen" name="delete_button"  />
+                    <form class="form-signin" action="action/action.php?a=delete" method="post" style="margin: 5px">
+                        <input type="submit" class="btn btn-danger" style="margin: 5px" value="Verwijderen"
+                            name="delete_button" />
                     </form>
 
                     <label style="margin: 5px">Binnenkort verloopt: Licentie X en Licentie Y</label>
@@ -134,33 +143,33 @@ $licentieSel = $licentie->fetch();
 
                 </div>
 
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="licentieTable">
                     <thead>
                         <tr>
                             <th colspan="2" class="text-center">Naam licentie <br>
-							<?php echo $licentieSel['licentienaam'] ?></th>
+                                <?php echo $licentieSel['licentienaam'] ?></th>
                         </tr>
                         <tr>
                             <th>Doelgroep <br>
-							<?php echo 'doelgroep1' ?></th>
+                                <?php echo 'doelgroep1' ?></th>
                             <th>Hoofdgebruiker <br>
-							<?php echo $licentieSel['hoofdgebruiker'] ?></th>
+                                <?php echo $licentieSel['hoofdgebruiker'] ?></th>
                         </tr>
                         <tr>
                             <th rowspan="2">Beschrijving <br>
-							<?php echo $licentieSel['licentiebeschrijving'] ?></th>
+                                <?php echo $licentieSel['licentiebeschrijving'] ?></th>
                             <th>Licentiecode <br>
-							<?php echo $licentieSel['licentienummer'] ?></th>
+                                <?php echo $licentieSel['licentienummer'] ?></th>
                         </tr>
                         <tr>
                             <th>Verleng uitleg <br>
-							<?php echo 'verleng uitleg 1' ?></th>
+                                <?php echo 'verleng uitleg 1' ?></th>
                         </tr>
                         <tr>
                             <th>Vervaldatum <br>
-							<?php echo $licentieSel['vervaldatum'] ?></th>
+                                <?php echo $licentieSel['vervaldatum'] ?></th>
                             <th>Installatie uitleg <br>
-							<?php echo $licentieSel['installatieuitleg'] ?></th>
+                                <?php echo $licentieSel['installatieuitleg'] ?></th>
                         </tr>
 
                     </thead>
@@ -208,14 +217,41 @@ $licentieSel = $licentie->fetch();
                             </div>
                         </div>
                     </div>
-                    <button type="submit" form="toevoegen" name="Toevoegen" value="Nieuw" class="btn btn-primary">Toevoegen</button>
+                    <button type="submit" form="toevoegen" name="Toevoegen" value="Nieuw"
+                        class="btn btn-primary">Toevoegen</button>
                 </form>
             </div>
         </div>
 
 
 
+        <script>
+            $(document).ready(function () {
+                var hideBool = true;
+                var toevoegen = $("#toevoegen");
+                var licentieTable = $("#licentieTable");
 
+                $(hideElements);
+
+                $("#hide").click(function () {
+                    hideBool = !hideBool
+                    $(hideElements);
+                })
+
+                function hideElements() {
+                    if (hideBool == true) {
+                        $(toevoegen).hide();
+                        $(licentieTable).show();
+                    }
+                    else {
+                        $(licentieTable).hide();
+                        $(toevoegen).show();
+                    }
+                }
+
+            });
+
+        </script>
 </body>
 
 </html>
