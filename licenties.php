@@ -114,7 +114,7 @@ $licentieSel = $licentie->fetch();
                     <a class="nav-link" href="#">Home.</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Account beheren.</a>
+                    <a class="nav-link" href="accountbeheer.php">Account beheren.</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="action/action.php?a=logout">Logout.</a>
@@ -168,11 +168,6 @@ $licentieSel = $licentie->fetch();
                 <div class="row">
                     <button type="button" class="btn btn-success btn-block" id="hide" style="margin: 5px">Licentie
                         toevoegen in/uitklappen</button>
-                    <button type="button" class="btn btn-success btn-block" style="margin: 5px">Licentie
-                        toevoegen</button>
-                </div>
-                <div class="row">
-                    <a href="accountbeheer.php"><button type="button" class="btn btn-primary btn-block" style="margin: 5px">Account beheren</button></a>
                 </div>
             </div>
             <div class="col-sm-8">

@@ -13,6 +13,19 @@ if($_GET['a'] == 'login'){
 if($_GET['a'] == 'logout'){
     Logout();
 }
+if($_GET['a'] == 'toevoegen'){
+    Toevoegen();
+}
+if($_GET['a'] == 'select'){
+    Select();
+}
+if($_GET['a'] == 'delete'){
+    Delete();
+}
+if($_GET['a'] == 'edit'){
+    Edit();
+}
+
 
 function Login() {
     // $conn (databaseconnectie) importeren in deze functie, omdat hij buiten de scope staat
