@@ -53,20 +53,20 @@ CREATE TABLE `licenties`  (
 -- ----------------------------
 -- Records of licenties
 -- ----------------------------
-INSERT INTO `licenties` VALUES (1, 1, '0000-00-00', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (2, 2, '0000-00-00', 'afdeling ict', 'Facebook', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (3, 3, '0000-00-00', 'afdeling ict', 'Tumblr', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (4, 4, '0000-00-00', 'afdeling ict', 'LinkedIn', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (5, 5, '0000-00-00', 'afdeling ict', 'MySpace', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (6, 6, '0000-00-00', 'afdeling ict', 'Hyves', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (7, 7, '0000-00-00', 'afdeling ict', 'Habbo', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (8, 8, '0000-00-00', 'afdeling ict', 'Google Agenda', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (9, 9, '0000-00-00', 'afdeling ict', 'PHPStorm', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (10, 10, '0000-00-00', 'afdeling ict', 'XAMPP', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (11, 11, '0000-00-00', 'afdeling ict', 'CMD', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (12, 12, '0000-00-00', 'afdeling ict', 'Microsoft Word', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (13, 13, '0000-00-00', 'afdeling ict', 'Microsoft Teamsssssssssssssss', 'beschrijving 1', 'installatieuitleg1');
-INSERT INTO `licenties` VALUES (23, 86, '0000-00-00', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (1, 1, '2020-06-10', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (2, 2, '2020-06-10', 'afdeling ict', 'Facebook', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (3, 3, '2020-06-10', 'afdeling ict', 'Tumblr', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (4, 4, '2020-06-10', 'afdeling ict', 'LinkedIn', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (5, 5, '2020-06-10', 'afdeling ict', 'MySpace', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (6, 6, '2020-06-10', 'afdeling ict', 'Hyves', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (7, 7, '2020-06-10', 'afdeling ict', 'Habbo', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (8, 8, '2020-06-10', 'afdeling ict', 'Google Agenda', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (9, 9, '2020-06-10', 'afdeling ict', 'PHPStorm', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (10, 10, '2020-06-10', 'afdeling ict', 'XAMPP', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (11, 11, '2020-06-10', 'afdeling ict', 'CMD', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (12, 12, '2020-06-10', 'afdeling ict', 'Microsoft Word', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (13, 13, '2020-06-10', 'afdeling ict', 'Microsoft Teamsssssssssssssss', 'beschrijving 1', 'installatieuitleg1');
+INSERT INTO `licenties` VALUES (23, 86, '2020-06-10', 'afdeling ict', 'Google', 'beschrijving 1', 'installatieuitleg1');
 
 -- ----------------------------
 -- Table structure for sessions

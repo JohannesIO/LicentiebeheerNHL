@@ -21,7 +21,7 @@ function Login() {
     if($_SERVER['REQUEST_METHOD'] === "POST") {
         // Checken of velden niet leeg zijn
         if(empty($_POST['email'] && $_POST['wachtwoord'])) {
-            echo "Niet alle velden zijn ingevuld, <br/> <a href='/licentiebeheer/index.php'>Klik hier om terug te gaan.</a>";
+            echo "Niet alle velden zijn ingevuld, <br/> <a href='index.php'>Klik hier om terug te gaan.</a>";
         }
         else {
             //TODO: betere beveiliging van de strings.
@@ -45,11 +45,11 @@ function Login() {
                 //Cookie daadwerkelijk aanmaken. 3600 seconden is 1 uur
                 setcookie('SessionID', $session_cookie_gen, time() + 3600, "/");
                 //Doorsturen naar licenties.php
-                header("Location: /licentiebeheer/licenties.php");
+                header("Location: /licenties.php");
                 die();
             }
             else {
-                echo "Onjuiste inloggegevens, <br/> <a href='/licentiebeheer/index.php'>Klik hier om terug te gaan.</a>";
+                echo "Onjuiste inloggegevens, <br/> <a href='index.php'>Klik hier om terug te gaan.</a>";
                 die();
             }
 
@@ -62,6 +62,6 @@ function Logout() {
     unset($_COOKIE['SessionID']);
     setcookie('SessionID', null, -1, '/');
     echo "gelukt";
-    header("Location: /licentiebeheer/index.php");
+    header("Location: /index.php");
     die();
 }

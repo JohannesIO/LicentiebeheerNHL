@@ -14,14 +14,30 @@ if (isset($_COOKIE['SessionID'])) {
     if ($checkSessionQuery && $number_of_rows == 0) {
         unset($_COOKIE['SessionID']);
         setcookie('SessionID', null, -1, '/');
-        header("Location: index.php");
+        header("Location: index1.php");
         die();
     }
 }
 else {
-    header("Location: index.php");
+    header("Location: index1.php");
     die();
 }
+
+$Date = date("Y/m/d");
+$over7dagen = date('Y-m-d', strtotime($Date. ' +7 days')). "<br>";
+$array = array();
+$aantal = 0;
+$licenties = $conn->query("SELECT vervaldatum, licentienaam  FROM licenties");
+foreach ($licenties as $item) {
+
+    if ($item[0] < $over7dagen){
+        $aantal++;
+        array_push($array, $item[1]);
+    }else{
+
+    }
+}
+
 
 if (!empty($_POST['Toevoegen'])){
 
@@ -58,6 +74,7 @@ if (!empty($_POST['Toevoegen'])){
 </head>
 
 <body>
+
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
@@ -98,7 +115,7 @@ if (!empty($_POST['Toevoegen'])){
                         toevoegen</button>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-primary btn-block" style="margin: 5px">Account beheren</button>
+                    <a href="accountbeheer.php"><button type="button" class="btn btn-primary btn-block" style="margin: 5px">Account beheren</button></a>
                 </div>
             </div>
             <div class="col-sm-8">
@@ -109,7 +126,27 @@ if (!empty($_POST['Toevoegen'])){
                         <input type="submit" class="btn btn-primary" value="Logout" name="logout_button"  />
                     </form>
 
-                    <label style="margin: 5px">Binnenkort verloopt: Licentie X en Licentie Y</label>
+                    <label style="margin: 3px" class="p-3 mb-2 bg-danger text-white">
+                    <?php
+                    if ($aantal > 2){
+                        ?>
+                        <h10> de volgende licenties zullen binnenkort verlopen </h10>
+                            <select id="licentienamen">
+                                <?php
+                                foreach ($array as $input){
+                                    ?>
+                                    <option><?php echo $input?></option>
+                                <?php }?>
+                            </select>
+
+                            <?php
+                        }else{
+                        echo "De volgende licenties zullen binnen een week verlopen:   ";
+                            print_r($array[0]);
+                            echo ",   ";
+                            print_r($array[1]);
+                        } ?>
+                    </label>
 
 
                 </div>
