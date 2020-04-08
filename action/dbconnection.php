@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "student";
-$password = "student";
+$username = "root";
+$password = "";
 $dbName = "licentiebeheer";
 
 try {

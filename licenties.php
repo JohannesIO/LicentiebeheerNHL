@@ -44,9 +44,6 @@ foreach ($licenties as $item) {
 }
 
 
-if (!empty($_POST['Toevoegen'])){
-
-    //TODO: Je kan niet niet-gecheckte variabelen in je database zetten.
 
 session_start();
 
@@ -129,7 +126,7 @@ $licentieSel = $licentie->fetch();
         </div>
 
     </nav>
-    <br />
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
