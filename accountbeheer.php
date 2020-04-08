@@ -23,7 +23,6 @@ else {
     die();
 }
 ?>
-
 <html>
 <head>
     <title>Accountbeheer</title>
