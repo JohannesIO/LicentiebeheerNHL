@@ -31,8 +31,11 @@ else {
 
 session_start();
 
-if (empty($_SESSION['LicentieID']))
-	$_SESSION['LicentieID'] = 0;
+if (empty($_SESSION['LicentieID'])){
+	$licentieMin = $conn->query("SELECT MIN(licentieid) AS LowLicentie FROM licenties");
+	$licentieMin = $licentieMin->fetch();
+	$_SESSION['LicentieID'] = $licentieMin['LowLicentie'];
+}
 $licentie = $conn->query("SELECT * FROM licenties WHERE licentieid=".$_SESSION['LicentieID']."");
 $licentieSel = $licentie->fetch();
 
@@ -153,10 +156,8 @@ $licentieSel = $licentie->fetch();
             </div>
             <div class="col-sm-8">
                 <div class="row">
-                    <form class="form-signin" action="" method="post" style="margin: 5px">
-                        <input type="submit" class="btn btn-info" style="margin: 5px" value="Bijwerken"
-                            name="bijwerk_button" />
-                    </form>
+                        <button type="button" class="btn btn-info" id="hide2" style="margin: 10px" >Bijwerken</button>
+
 
                     <form class="form-signin" action="action/action.php?a=delete" method="post" style="margin: 5px">
                         <input type="submit" class="btn btn-danger" style="margin: 5px" value="Verwijderen"
@@ -168,39 +169,68 @@ $licentieSel = $licentie->fetch();
 
                 </div>
 
+				<form action="action/action.php?a=edit" method='post' id="edit">
                 <table class="table table-bordered" id="licentieDisplay">
                     <thead>
                         <tr>
-                            <th colspan="2" class="text-center">Naam licentie <br>
-                                <?php echo $licentieSel['licentienaam'] ?></th>
+                            <td colspan="2" class="text-center"> 
+								<b> Naam licentie </b> <br>
+                                <text class="LicentieInfo"> <?php echo $licentieSel['licentienaam'] ?> </text>
+								<textarea class="form-control text-center LicentieEditField" name="LNaam" rows="1" placeholder="<?php echo $licentieSel['licentienaam'] ?>" ></textarea>
+							</td>
                         </tr>
                         <tr>
-                            <th>Doelgroep <br>
-                                <?php echo 'doelgroep1' ?></th>
-                            <th>Hoofdgebruiker <br>
-                                <?php echo $licentieSel['hoofdgebruiker'] ?></th>
+							<td>
+								<b> Doelgroep </b> <br>
+                                <text class="LicentieInfo"> <?php echo $licentieSel['doelgroep'] ?> </text>
+								<textarea class="form-control text-left LicentieEditField" name="LDoelGroep" rows="1" placeholder="<?php echo $licentieSel['doelgroep'] ?>" ></textarea>
+							</td>
+							<td>
+								<b> Hoofdgebruiker </b> <br>
+                                <text class="LicentieInfo"> <?php echo $licentieSel['hoofdgebruiker'] ?> </text>
+								<textarea class="form-control text-left LicentieEditField" name="LHGebr"  rows="1" placeholder="<?php echo $licentieSel['hoofdgebruiker'] ?>" ></textarea>
+							</td>
                         </tr>
                         <tr>
-                            <th rowspan="2">Beschrijving <br>
-                                <?php echo $licentieSel['licentiebeschrijving'] ?></th>
-                            <th>Licentiecode <br>
-                                <?php echo $licentieSel['licentienummer'] ?></th>
+							<td rowspan=2>
+								<b> Beschrijving </b> <br>
+                                <text class="LicentieInfo"> <?php echo $licentieSel['licentiebeschrijving'] ?> </text>
+								<textarea class="form-control text-left LicentieEditField" name="LBeschr"  rows="4" placeholder="<?php echo $licentieSel['licentiebeschrijving'] ?>" ></textarea>
+							</td>
+							<td>
+								<b> Licentiecode </b> <br>
+                                <text class="LicentieInfo"> <?php echo $licentieSel['licentienummer'] ?> </text>
+								<textarea class="form-control text-left LicentieEditField" name="LCode"  rows="1" placeholder="<?php echo $licentieSel['licentienummer'] ?>" ></textarea>
+							</td>
                         </tr>
                         <tr>
-                            <th>Verleng uitleg <br>
-                                <?php echo 'verleng uitleg 1' ?></th>
+							<td>
+								<b> Verleng Uitleg </b> <br>
+                                <text class="LicentieInfo"> <?php echo $licentieSel['verlenguitleg'] ?> </text>
+								<textarea class="form-control text-left LicentieEditField" name="LVerleng"  rows="1" placeholder="<?php echo $licentieSel['verlenguitleg'] ?>" ></textarea>
+							</td>
                         </tr>
                         <tr>
-                            <th>Vervaldatum <br>
-                                <?php echo $licentieSel['vervaldatum'] ?></th>
-                            <th>Installatie uitleg <br>
-                                <?php echo $licentieSel['installatieuitleg'] ?></th>
+							<td>
+								<b> Vervaldatum </b> <br>
+                                <text class="LicentieInfo"> <?php echo $licentieSel['vervaldatum'] ?> </text>
+								<textarea class="form-control text-left LicentieEditField" name="LVerval"  rows="1" placeholder="<?php echo $licentieSel['vervaldatum'] ?>" ></textarea>
+							</td>
+							<td>
+								<b> Installatie Uitleg </b> <br>
+                                <text class="LicentieInfo"> <?php echo $licentieSel['installatieuitleg'] ?> </text>
+								<textarea class="form-control text-left LicentieEditField" name="LInstall"  rows="1" placeholder="<?php echo $licentieSel['installatieuitleg'] ?>" ></textarea>
+							</td>
                         </tr>
 
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
+					<button type="submit" form="edit" name="Edit" value="Edit" class="btn btn-primary LicentieEditField">Bijwerking Vaststellen</button>
+                </form>
+
+
                 <form action="action/action.php?a=toevoegen" method='post' id="toevoegen">
                     <div class="row-">
                         <div class="form-group">
@@ -253,11 +283,15 @@ $licentieSel = $licentie->fetch();
         <script>
             $(document).ready(function () {
                 var hideBool = true;
+				var hideBoolEdit = true;
                 var toevoegen = $("#toevoegen");
                 var licentieTable = $("#licentieTable");
                 var licentieDisplay = $("#licentieDisplay");
+				var LicentieInfo = $(".LicentieInfo");
+				var LicentieEditField = $(".LicentieEditField");
 
                 $(hideElements);
+				$(hideElementsEdit);
 
                 $("#hide").click(function () {
                     hideBool = !hideBool
@@ -277,6 +311,22 @@ $licentieSel = $licentie->fetch();
                     }
                 }
 
+
+				$("#hide2").click(function () {
+                    hideBoolEdit = !hideBoolEdit
+                    $(hideElementsEdit);
+                })
+
+                function hideElementsEdit() {
+                    if (hideBoolEdit == true) {
+                        $(LicentieInfo).show();
+                        $(LicentieEditField).hide();
+                    }
+                    else {
+                        $(LicentieInfo).hide();
+                        $(LicentieEditField).show();
+                    }
+                }
                 $('#LVerval').tooltip();
 
 

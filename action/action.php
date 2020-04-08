@@ -77,6 +77,9 @@ function Login() {
 }
 
 function Logout() {
+	global $conn;
+	$SessionID = $_COOKIE['SessionID'];
+	$conn->exec("DELETE FROM sessions WHERE cookie='$SessionID'");
     unset($_COOKIE['SessionID']);
     setcookie('SessionID', null, -1, '/');
     header("Location: /licentiebeheer/index.php");
