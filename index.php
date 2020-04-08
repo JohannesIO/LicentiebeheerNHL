@@ -16,7 +16,6 @@ if (isset($_COOKIE['SessionID'])) {
         die();
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +25,8 @@ if (isset($_COOKIE['SessionID'])) {
     <link rel="stylesheet" type="text/css" href="assets/stylesheet/signin_stylesheet.css">
     <!-- Bootstrap CSS importeren. -->
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body class="text-center">
 <form class="form-signin" action="action/action.php?a=login" method="post">
@@ -42,7 +43,7 @@ if (isset($_COOKIE['SessionID'])) {
     <input type="submit" class="btn btn-lg btn-primary btn-block" name="login_submit" value="Inloggen">
 
     <!--<a href="wachwoordvergeten.php">Wachtwoord vergeten?</a><br />-->
-    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+    <p class="mt-5 mb-3 text-muted">Groep 22 &copy; 2020</p>
 </form>
 </body>
 </html>

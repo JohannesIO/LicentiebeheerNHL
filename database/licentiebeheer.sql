@@ -83,5 +83,32 @@ CREATE TABLE `sessions`  (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
+INSERT INTO `sessions` VALUES (18, '', 'test@test.com', '508c72f08a09c4c1d3439642cdf95c9895948eb1');
+INSERT INTO `sessions` VALUES (19, '', 'test@test.com', '3e90886657942387410c38091d5b46ffb287c216');
+INSERT INTO `sessions` VALUES (20, '', 'test@test.com', 'ec1266feaa5963be037ec569bbbcbf0d7ae49c9b');
+INSERT INTO `sessions` VALUES (21, '', 'test@test.com', '841fc4c3821531c32b23cb8663e8565d50eacbdb');
+INSERT INTO `sessions` VALUES (22, '', 'test@test.com', '327cd67bf9a38ccc098338a09321564e3d433f0b');
+INSERT INTO `sessions` VALUES (23, '', 'test@test.com', '9cc64ce7b784e338fc0f1efceda6453f232fbcc5');
+INSERT INTO `sessions` VALUES (24, '', 'test@test.com', '4dfb76d94cd1faaf6b171a4da9fd992f1fae86bf');
+INSERT INTO `sessions` VALUES (25, '', 'test@test.com', '618bff07f51615ed8f7ab6ecb95c0b7cbf36b970');
+INSERT INTO `sessions` VALUES (26, '', 'test@test.com', '9c4f6b86cf2df6896d25b4a5c8d4da8ae7b86025');
+INSERT INTO `sessions` VALUES (27, '', 'test@test.com', '1ad764cc38532ae419923ffcc3c2baf938ecc47b');
+INSERT INTO `sessions` VALUES (28, '', 'test@test.com', '9b085787bd1e61fa55b347efa4d0887529ed7e0e');
+INSERT INTO `sessions` VALUES (29, '', 'test@test.com', 'test3fe3fa2aab6b49d72faf18b81450963e8b68721f');
+INSERT INTO `sessions` VALUES (30, '', 'test@test.com', 'testec605f7954909f350a22c0c50788c89199abead6');
+INSERT INTO `sessions` VALUES (31, '', 'test@test.com', 'test0fb47b6326b1f693c1d18b936a4c73b58ac251f6');
+INSERT INTO `sessions` VALUES (32, 'test', 'test@test.com', '796e4a16ac13cd9b9ac2b80f34c724e8d18c6b25');
+INSERT INTO `sessions` VALUES (33, 'test', 'test@test.com', 'dec15f93ebaa6abfc3572ba848f845eab1e369dd');
+INSERT INTO `sessions` VALUES (34, 'test', 'test@test.com', 'ff8f710996863347e77d933854c853588f204ec7');
+INSERT INTO `sessions` VALUES (35, 'test', 'test@test.com', '44ff6b3368bfa4ad22ede2b8448f650ca06cbe0e');
+INSERT INTO `sessions` VALUES (36, 'test', 'test@test.com', 'ae4e23999965c9247d4859c9ebc76caa0c689ef4');
+INSERT INTO `sessions` VALUES (37, 'test', 'test@test.com', 'ddd462a81ff1423f7011722ff22877c70a2696c3');
+INSERT INTO `sessions` VALUES (38, 'test', 'test@test.com', 'd1eb7b8f1703cd332c8bda5e4e7d5a296fefc7ff');
+INSERT INTO `sessions` VALUES (39, 'test', 'test@test.com', '3628a5776acbc800c004e99c73f4e4796862d655');
+INSERT INTO `sessions` VALUES (40, 'test', 'test@test.com', 'e8f33c0a7194af864b07e0901f68bf03e900bf36');
+INSERT INTO `sessions` VALUES (41, 'test', 'test@test.com', 'df73a61b24d2b4923c3caafa6f24afca14d54879');
+INSERT INTO `sessions` VALUES (42, 'test', 'test@test.com', 'a3b8eedb2b490bf88dc51456eef43c625b2bd2cb');
+INSERT INTO `sessions` VALUES (43, 'test', 'test@test.com', 'f3f9cafbd692ed755473ccbd67726dbe37261fbd');
+INSERT INTO `sessions` VALUES (44, 'test', 'test@test.com', 'c6a1a7507feea75bfdc55623ab5c7681077fa496');
 
 SET FOREIGN_KEY_CHECKS = 1;
