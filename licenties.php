@@ -55,7 +55,7 @@ if (empty($_SESSION['LicentieID'])){
 	$licentieMin = $licentieMin->fetch();
 	$_SESSION['LicentieID'] = $licentieMin['LowLicentie'];
 }
-$licentie = $conn->query("SELECT * FROM licenties WHERE licentieid=".$_SESSION['LicentieID']."");
+$licentie = $conn->query("SELECT * FROM licenties WHERE licentieid=".$_SESSION['LicentieID']." ");
 $licentieSel = $licentie->fetch();
 
 ?>
@@ -378,5 +378,4 @@ $licentieSel = $licentie->fetch();
 
         </script>
 </body>
-
 </html>
