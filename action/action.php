@@ -22,6 +22,9 @@ if($_GET['a'] == 'select'){
 if($_GET['a'] == 'delete'){
     Delete();
 }
+if($_GET['a'] == 'edit'){
+    Edit();
+}
 
 
 
@@ -92,13 +95,15 @@ function Toevoegen() {
 
 	$licentienummer = $_POST['LCode'];
 	$vervaldatum = $_POST['LVerval'];
-	$hoofdgebruiker = $_POST['LHGebr'];
-	$licentienaam = $_POST['LNaam'];
-	$licentiebeschrijving = $_POST['LBeschr'];
-	$installatieuitleg = $_POST['LInstall'];
+	$hoofdgebruiker = filter_var($_POST["LHGebr"], FILTER_SANITIZE_STRING);
+	$licentienaam = filter_var($_POST["LNaam"], FILTER_SANITIZE_STRING);
+	$licentiebeschrijving = filter_var($_POST["LBeschr"], FILTER_SANITIZE_STRING);
+	$installatieuitleg = filter_var($_POST["LInstall"], FILTER_SANITIZE_STRING);
+	$doelgroep = filter_var($_POST["LDoelGroep"], FILTER_SANITIZE_STRING);
+	$verlenguitleg = filter_var($_POST["LVerleng"], FILTER_SANITIZE_STRING);
 
-	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg) 
-	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg')");
+	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg, doelgroep, verlenguitleg) 
+	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg', '$doelgroep', '$verlenguitleg')");
 	echo "<script>alert('licentie toegevoegd')</script>";
 	header("Location: /licentiebeheer/licenties.php");
 	die();
@@ -119,6 +124,39 @@ function Delete() {
 	session_start();
 	$licentieid = $_SESSION['LicentieID'];
 	$conn->exec("DELETE FROM licenties WHERE licentieid=$licentieid");
+	header("Location: /licentiebeheer/licenties.php");
+	die();
+}
+
+function Edit() { 
+	require("dbconnection.php");
+	session_start();
+
+	$licentieid = $_SESSION['LicentieID'];
+	$licentienummer = $_POST['LCode'];
+	$vervaldatum = $_POST['LVerval'];
+	$hoofdgebruiker = filter_var($_POST["LHGebr"], FILTER_SANITIZE_STRING);
+	$licentienaam = filter_var($_POST["LNaam"], FILTER_SANITIZE_STRING);
+	$licentiebeschrijving = filter_var($_POST["LBeschr"], FILTER_SANITIZE_STRING);
+	$installatieuitleg = filter_var($_POST["LInstall"], FILTER_SANITIZE_STRING);
+	$doelgroep = filter_var($_POST["LDoelGroep"], FILTER_SANITIZE_STRING);
+	$verlenguitleg = filter_var($_POST["LVerleng"], FILTER_SANITIZE_STRING);
+
+	$sql = "UPDATE Licenties SET 
+	licentienummer='$licentienummer', 
+	vervaldatum='$vervaldatum', 
+	hoofdgebruiker='$hoofdgebruiker', 
+	licentienaam='$licentienaam', 
+	licentiebeschrijving='$licentiebeschrijving', 
+	installatieuitleg='$installatieuitleg',
+	doelgroep='$doelgroep', 
+	verlenguitleg='$verlenguitleg'
+	WHERE licentieid=$licentieid";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+	
+
+	echo "<script>alert('Licentie Bijgewerkt')</script>";
 	header("Location: /licentiebeheer/licenties.php");
 	die();
 }

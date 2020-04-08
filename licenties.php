@@ -176,50 +176,50 @@ $licentieSel = $licentie->fetch();
                             <td colspan="2" class="text-center"> 
 								<b> Naam licentie </b> <br>
                                 <text class="LicentieInfo"> <?php echo $licentieSel['licentienaam'] ?> </text>
-								<textarea class="form-control text-center LicentieEditField" name="LNaam" rows="1" placeholder="<?php echo $licentieSel['licentienaam'] ?>" ></textarea>
+								<textarea class="form-control text-center LicentieEditField" name="LNaam" rows="1" required><?php echo $licentieSel['licentienaam'] ?></textarea>
 							</td>
                         </tr>
                         <tr>
 							<td>
 								<b> Doelgroep </b> <br>
                                 <text class="LicentieInfo"> <?php echo $licentieSel['doelgroep'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LDoelGroep" rows="1" placeholder="<?php echo $licentieSel['doelgroep'] ?>" ></textarea>
+								<textarea class="form-control text-left LicentieEditField" name="LDoelGroep" rows="1" required><?php echo $licentieSel['doelgroep'] ?></textarea>
 							</td>
 							<td>
 								<b> Hoofdgebruiker </b> <br>
                                 <text class="LicentieInfo"> <?php echo $licentieSel['hoofdgebruiker'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LHGebr"  rows="1" placeholder="<?php echo $licentieSel['hoofdgebruiker'] ?>" ></textarea>
+								<textarea class="form-control text-left LicentieEditField" name="LHGebr"  rows="1" required><?php echo $licentieSel['hoofdgebruiker'] ?></textarea>
 							</td>
                         </tr>
                         <tr>
 							<td rowspan=2>
 								<b> Beschrijving </b> <br>
                                 <text class="LicentieInfo"> <?php echo $licentieSel['licentiebeschrijving'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LBeschr"  rows="4" placeholder="<?php echo $licentieSel['licentiebeschrijving'] ?>" ></textarea>
+								<textarea class="form-control text-left LicentieEditField" name="LBeschr"  rows="4" required><?php echo $licentieSel['licentiebeschrijving'] ?></textarea>
 							</td>
 							<td>
 								<b> Licentiecode </b> <br>
                                 <text class="LicentieInfo"> <?php echo $licentieSel['licentienummer'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LCode"  rows="1" placeholder="<?php echo $licentieSel['licentienummer'] ?>" ></textarea>
+								<textarea class="form-control text-left LicentieEditField" name="LCode"  rows="1" required><?php echo $licentieSel['licentienummer'] ?></textarea>
 							</td>
                         </tr>
                         <tr>
 							<td>
 								<b> Verleng Uitleg </b> <br>
                                 <text class="LicentieInfo"> <?php echo $licentieSel['verlenguitleg'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LVerleng"  rows="1" placeholder="<?php echo $licentieSel['verlenguitleg'] ?>" ></textarea>
+								<textarea class="form-control text-left LicentieEditField" name="LVerleng"  rows="1" required><?php echo $licentieSel['verlenguitleg'] ?></textarea>
 							</td>
                         </tr>
                         <tr>
 							<td>
 								<b> Vervaldatum </b> <br>
                                 <text class="LicentieInfo"> <?php echo $licentieSel['vervaldatum'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LVerval"  rows="1" placeholder="<?php echo $licentieSel['vervaldatum'] ?>" ></textarea>
+								<textarea class="form-control text-left LicentieEditField" name="LVerval"  rows="1" required><?php echo $licentieSel['vervaldatum'] ?></textarea>
 							</td>
 							<td>
 								<b> Installatie Uitleg </b> <br>
                                 <text class="LicentieInfo"> <?php echo $licentieSel['installatieuitleg'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LInstall"  rows="1" placeholder="<?php echo $licentieSel['installatieuitleg'] ?>" ></textarea>
+								<textarea class="form-control text-left LicentieEditField" name="LInstall"  rows="1" required><?php echo $licentieSel['installatieuitleg'] ?></textarea>
 							</td>
                         </tr>
 
