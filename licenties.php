@@ -80,29 +80,6 @@ $licentieSel = $licentie->fetch();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script>
-        function zoekFunctie() {
-            // Variabelen verklaren
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("zoekenInput");
-            // toUpperCase om het niet hoofdlettergevoelig te maken
-            filter = input.value.toUpperCase();
-            table = document.getElementById("licentieTable");
-            tr = table.getElementsByTagName("tr");
-            // Door alle table rows loopen met for lus, en de rows niet laten zien welke niet aan de zoek query voldoen
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -138,8 +115,8 @@ $licentieSel = $licentie->fetch();
                     </thead>
                     <div class="form-group">
                         <label for=""></label>
-                        <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput" aria-describedby="helpId"
-                            placeholder="Licenties zoeken..." />
+                        <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput"
+                            aria-describedby="helpId" placeholder="Licenties zoeken..." />
                     </div>
                     <tbody>
                         <?php
@@ -155,7 +132,6 @@ $licentieSel = $licentie->fetch();
                                       <script>
                                         $('#" . $licentieID . "').click(function () {
                                             $.get('action/action.php?a=select&licentieID=" . $licentieID . "')
-
                                             location.reload();
                                         });
                                     </script>      
@@ -172,7 +148,7 @@ $licentieSel = $licentie->fetch();
             </div>
             <div class="col-sm-8">
                 <div class="row">
-                        <button type="button" class="btn btn-info" id="hide2" style="margin: 10px" >Bijwerken</button>
+                    <button type="button" class="btn btn-info" id="hide2" style="margin: 10px">Bijwerken</button>
 
 
                     <form class="form-signin" action="action/action.php?a=delete" method="post" style="margin: 5px">
@@ -181,19 +157,19 @@ $licentieSel = $licentie->fetch();
                     </form>
 
                     <label style="margin: 3px" class="p-3 mb-2 bg-danger text-white">
-                    <?php
+                        <?php
                     if ($aantal > 2){
                         ?>
                         <h10> de volgende licenties zullen binnenkort verlopen </h10>
-                            <select id="licentienamen">
-                                <?php
+                        <select id="licentienamen">
+                            <?php
                                 foreach ($array as $input){
                                     ?>
-                                    <option><?php echo $input?></option>
-                                <?php }?>
-                            </select>
+                            <option><?php echo $input?></option>
+                            <?php }?>
+                        </select>
 
-                            <?php
+                        <?php
                         }else{
                         echo "De volgende licenties zullen binnen een week verlopen:   ";
                             print_r($array[0]);
@@ -205,72 +181,82 @@ $licentieSel = $licentie->fetch();
 
                 </div>
 
-				<form action="action/action.php?a=edit" method='post' id="edit">
-                <table class="table table-bordered" id="licentieDisplay">
-                    <thead>
-                        <tr>
-                            <td colspan="2" class="text-center">
-								<b> Naam licentie </b> <br>
-                                <text class="LicentieInfo"> <?php echo $licentieSel['licentienaam'] ?> </text>
-								<textarea class="form-control text-center LicentieEditField" name="LNaam" rows="1" required><?php echo $licentieSel['licentienaam'] ?></textarea>
-							</td>
-                        </tr>
-                        <tr>
-							<td>
-								<b> Doelgroep </b> <br>
-                                <text class="LicentieInfo"> <?php echo $licentieSel['doelgroep'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LDoelGroep" rows="1" required><?php echo $licentieSel['doelgroep'] ?></textarea>
-							</td>
-							<td>
-								<b> Hoofdgebruiker </b> <br>
-                                <text class="LicentieInfo"> <?php echo $licentieSel['hoofdgebruiker'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LHGebr"  rows="1" required><?php echo $licentieSel['hoofdgebruiker'] ?></textarea>
-							</td>
-                        </tr>
-                        <tr>
-							<td rowspan=2>
-								<b> Beschrijving </b> <br>
-                                <text class="LicentieInfo"> <?php echo $licentieSel['licentiebeschrijving'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LBeschr"  rows="4" required><?php echo $licentieSel['licentiebeschrijving'] ?></textarea>
-							</td>
-							<td>
-								<b> Licentiecode </b> <br>
-                                <text class="LicentieInfo"> <?php echo $licentieSel['licentienummer'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LCode"  rows="1" required><?php echo $licentieSel['licentienummer'] ?></textarea>
-							</td>
-                        </tr>
-                        <tr>
-							<td>
-								<b> Verleng Uitleg </b> <br>
-                                <text class="LicentieInfo"> <?php echo $licentieSel['verlenguitleg'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LVerleng"  rows="1" required><?php echo $licentieSel['verlenguitleg'] ?></textarea>
-							</td>
-                        </tr>
-                        <tr>
-							<td>
-								<b> Vervaldatum </b> <br>
-                                <text class="LicentieInfo"> <?php echo $licentieSel['vervaldatum'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LVerval"  rows="1" required><?php echo $licentieSel['vervaldatum'] ?></textarea>
-							</td>
-							<td>
-								<b> Installatie Uitleg </b> <br>
-                                <text class="LicentieInfo"> <?php echo $licentieSel['installatieuitleg'] ?> </text>
-								<textarea class="form-control text-left LicentieEditField" name="LInstall"  rows="1" required><?php echo $licentieSel['installatieuitleg'] ?></textarea>
-							</td>
-                        </tr>
+                <form action="action/action.php?a=edit" method='post' id="edit">
+                    <table class="table table-bordered" id="licentieDisplay">
+                        <thead>
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <b> Naam licentie </b> <br>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['licentienaam'] ?> </text>
+                                    <textarea class="form-control text-center LicentieEditField" name="LNaam" rows="1"
+                                        required><?php echo $licentieSel['licentienaam'] ?></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b> Doelgroep </b> <br>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['doelgroep'] ?> </text>
+                                    <textarea class="form-control text-left LicentieEditField" name="LDoelGroep"
+                                        rows="1" required><?php echo $licentieSel['doelgroep'] ?></textarea>
+                                </td>
+                                <td>
+                                    <b> Hoofdgebruiker </b> <br>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['hoofdgebruiker'] ?> </text>
+                                    <textarea class="form-control text-left LicentieEditField" name="LHGebr" rows="1"
+                                        required><?php echo $licentieSel['hoofdgebruiker'] ?></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan=2>
+                                    <b> Beschrijving </b> <br>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['licentiebeschrijving'] ?>
+                                    </text>
+                                    <textarea class="form-control text-left LicentieEditField" name="LBeschr" rows="4"
+                                        required><?php echo $licentieSel['licentiebeschrijving'] ?></textarea>
+                                </td>
+                                <td>
+                                    <b> Licentiecode </b> <br>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['licentienummer'] ?> </text>
+                                    <textarea class="form-control text-left LicentieEditField" name="LCode" rows="1"
+                                        required><?php echo $licentieSel['licentienummer'] ?></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b> Verleng Uitleg </b> <br>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['verlenguitleg'] ?> </text>
+                                    <textarea class="form-control text-left LicentieEditField" name="LVerleng" rows="1"
+                                        required><?php echo $licentieSel['verlenguitleg'] ?></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b> Vervaldatum </b> <br>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['vervaldatum'] ?> </text>
+                                    <textarea class="form-control text-left LicentieEditField" name="LVerval" rows="1"
+                                        required><?php echo $licentieSel['vervaldatum'] ?></textarea>
+                                </td>
+                                <td>
+                                    <b> Installatie Uitleg </b> <br>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['installatieuitleg'] ?> </text>
+                                    <textarea class="form-control text-left LicentieEditField" name="LInstall" rows="1"
+                                        required><?php echo $licentieSel['installatieuitleg'] ?></textarea>
+                                </td>
+                            </tr>
 
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-					<button type="submit" form="edit" name="Edit" value="Edit" class="btn btn-primary LicentieEditField">Bijwerking Vaststellen</button>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <button type="submit" form="edit" name="Edit" value="Edit"
+                        class="btn btn-primary LicentieEditField">Bijwerking Vaststellen</button>
                 </form>
 
 
-                <form action="action/action.php?a=toevoegen" method='post' id="toevoegen">
+                <form action="action/action.php?a=toevoegen" method='post' id="toevoegen" hidden>
                     <div class="row-">
                         <div class="form-group">
-                            <textarea class="form-control text-center" name="LNaam" id="" rows="1"
+                            <textarea class="form-control text-center" name="LNaam" id="LicentieNaam" rows="1"
                                 placeholder="Naam Licentie" required></textarea>
                         </div>
                     </div>
@@ -295,8 +281,8 @@ $licentieSel = $licentie->fetch();
                                     placeholder="Hoofdgebruiker"></textarea>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="LCode" id="" rows="2"
-                                    placeholder="Licentiecode" required></textarea>
+                                <textarea class="form-control" name="LCode" id="" rows="2" placeholder="Licentiecode"
+                                    required></textarea>
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="LVerleng" id="" rows="4"
@@ -319,15 +305,14 @@ $licentieSel = $licentie->fetch();
         <script>
             $(document).ready(function () {
                 var hideBool = true;
-				var hideBoolEdit = true;
+                var hideBoolEdit = true;
                 var toevoegen = $("#toevoegen");
-                var licentieTable = $("#licentieTable");
                 var licentieDisplay = $("#licentieDisplay");
-				var LicentieInfo = $(".LicentieInfo");
-				var LicentieEditField = $(".LicentieEditField");
+                var LicentieInfo = $(".LicentieInfo");
+                var LicentieEditField = $(".LicentieEditField");
 
-                $(hideElements);
-				$(hideElementsEdit);
+
+                $(hideElementsEdit);
 
                 $("#hide").click(function () {
                     hideBool = !hideBool
@@ -338,17 +323,17 @@ $licentieSel = $licentie->fetch();
                     if (hideBool == true) {
                         $(toevoegen).hide();
                         $(licentieDisplay).show();
-                        $(licentieTable).show();
+
                     }
                     else {
-                        $(licentieTable).hide();
                         $(licentieDisplay).hide();
                         $(toevoegen).show();
+                        $("#LicentieNaam").focus();
                     }
                 }
 
 
-				$("#hide2").click(function () {
+                $("#hide2").click(function () {
                     hideBoolEdit = !hideBoolEdit
                     $(hideElementsEdit);
                 })
@@ -365,9 +350,32 @@ $licentieSel = $licentie->fetch();
                 }
                 $('#LVerval').tooltip();
 
+                function zoekFunctie() {
+                    // Variabelen verklaren
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("zoekenInput");
+                    // toUpperCase om het niet hoofdlettergevoelig te maken
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("licentieTable");
+                    tr = table.getElementsByTagName("tr");
+                    // Door alle table rows loopen met for lus, en de rows niet laten zien welke niet aan de zoek query voldoen
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+
 
             });
 
         </script>
 </body>
+
 </html>
