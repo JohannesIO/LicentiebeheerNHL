@@ -58,7 +58,6 @@ $licentieSel = $licentie->fetch();
 ?>
 
 <html>
-
 <head>
     <title>Licenties</title>
     <!-- Required meta tags -->
@@ -80,6 +79,28 @@ $licentieSel = $licentie->fetch();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script>
+        function zoekFunctie() {
+            // Variabelen verklaren
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("zoekenInput");
+            // toUpperCase om het niet hoofdlettergevoelig te maken
+            filter = input.value.toUpperCase();
+            table = document.getElementById("licentieTable");
+            tr = table.getElementsByTagName("tr");
+            // Door alle table rows loopen met for lus, en de rows niet laten zien welke niet aan de zoek query voldoen
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
 </head>
 
 <body>
@@ -115,8 +136,8 @@ $licentieSel = $licentie->fetch();
                     </thead>
                     <div class="form-group">
                         <label for=""></label>
-                        <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput"
-                            aria-describedby="helpId" placeholder="Licenties zoeken..." />
+                        <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput" aria-describedby="helpId"
+                               placeholder="Licenties zoeken..." />
                     </div>
                     <tbody>
                         <?php
@@ -186,7 +207,7 @@ $licentieSel = $licentie->fetch();
                         <thead>
                             <tr>
                                 <td colspan="2" class="text-center">
-                                    <b> Naam licentie </b> <br>
+                                    <b> Naam licentie * </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['licentienaam'] ?> </text>
                                     <textarea class="form-control text-center LicentieEditField" name="LNaam" rows="1"
                                         required><?php echo $licentieSel['licentienaam'] ?></textarea>
@@ -197,13 +218,13 @@ $licentieSel = $licentie->fetch();
                                     <b> Doelgroep </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['doelgroep'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LDoelGroep"
-                                        rows="1" required><?php echo $licentieSel['doelgroep'] ?></textarea>
+                                        rows="1" ><?php echo $licentieSel['doelgroep'] ?></textarea>
                                 </td>
                                 <td>
                                     <b> Hoofdgebruiker </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['hoofdgebruiker'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LHGebr" rows="1"
-                                        required><?php echo $licentieSel['hoofdgebruiker'] ?></textarea>
+                                        ><?php echo $licentieSel['hoofdgebruiker'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -212,13 +233,13 @@ $licentieSel = $licentie->fetch();
                                     <text class="LicentieInfo"> <?php echo $licentieSel['licentiebeschrijving'] ?>
                                     </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LBeschr" rows="4"
-                                        required><?php echo $licentieSel['licentiebeschrijving'] ?></textarea>
+                                        ><?php echo $licentieSel['licentiebeschrijving'] ?></textarea>
                                 </td>
                                 <td>
                                     <b> Licentiecode </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['licentienummer'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LCode" rows="1"
-                                        required><?php echo $licentieSel['licentienummer'] ?></textarea>
+                                        ><?php echo $licentieSel['licentienummer'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -226,7 +247,7 @@ $licentieSel = $licentie->fetch();
                                     <b> Verleng Uitleg </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['verlenguitleg'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LVerleng" rows="1"
-                                        required><?php echo $licentieSel['verlenguitleg'] ?></textarea>
+                                        ><?php echo $licentieSel['verlenguitleg'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -234,13 +255,13 @@ $licentieSel = $licentie->fetch();
                                     <b> Vervaldatum </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['vervaldatum'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LVerval" rows="1"
-                                        required><?php echo $licentieSel['vervaldatum'] ?></textarea>
+                                        ><?php echo $licentieSel['vervaldatum'] ?></textarea>
                                 </td>
                                 <td>
                                     <b> Installatie Uitleg </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['installatieuitleg'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LInstall" rows="1"
-                                        required><?php echo $licentieSel['installatieuitleg'] ?></textarea>
+                                        ><?php echo $licentieSel['installatieuitleg'] ?></textarea>
                                 </td>
                             </tr>
 
@@ -349,28 +370,6 @@ $licentieSel = $licentie->fetch();
                     }
                 }
                 $('#LVerval').tooltip();
-
-                function zoekFunctie() {
-                    // Variabelen verklaren
-                    var input, filter, table, tr, td, i, txtValue;
-                    input = document.getElementById("zoekenInput");
-                    // toUpperCase om het niet hoofdlettergevoelig te maken
-                    filter = input.value.toUpperCase();
-                    table = document.getElementById("licentieTable");
-                    tr = table.getElementsByTagName("tr");
-                    // Door alle table rows loopen met for lus, en de rows niet laten zien welke niet aan de zoek query voldoen
-                    for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[0];
-                        if (td) {
-                            txtValue = td.textContent || td.innerText;
-                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                tr[i].style.display = "";
-                            } else {
-                                tr[i].style.display = "none";
-                            }
-                        }
-                    }
-                }
 
 
             });

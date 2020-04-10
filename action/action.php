@@ -65,7 +65,8 @@ function Login() {
                     die();
                 }
                 else {
-                    echo "password verify niet gelukt";
+                    echo "Onjuist wachtwoord, <br/> <a href='index.php'>Klik hier om terug te gaan.</a>";
+                    die();
                 }
             }
             else {
@@ -91,7 +92,6 @@ function Logout() {
 
 function Toevoegen() {
 	require("dbconnection.php");
-    //TODO: Je kan niet niet-gecheckte variabelen in je database zetten.
 
 	$licentienummer = $_POST['LCode'];
 	$vervaldatum = $_POST['LVerval'];
