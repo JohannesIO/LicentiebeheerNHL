@@ -1,33 +1,13 @@
 <?php
-require('action/dbconnection.php');
-
-//Checken of SessionID cookie bestaat.
-if (isset($_COOKIE['SessionID'])) {
-    //TODO: beter checken naar potentiele injectie.
-    $session_ID_var = htmlspecialchars($_COOKIE['SessionID']);
-    //Checken of session bestaat dmv cookie hash.
-    $checkSessionQuery = "SELECT * FROM sessions WHERE cookie = '$session_ID_var'";
-    $checkSessionResult = $conn->prepare($checkSessionQuery);
-    $checkSessionResult->execute();
-    $number_of_rows = $checkSessionResult->fetchColumn();
-    // Checken of query is uitgevoerd && cookie in sessions tabel staat.
-    if ($checkSessionQuery && $number_of_rows != 0) {
-        header("Location: licenties.php");
-        die();
-    }
-}
+    require('action/dbconnection.php');
+    require('includes/beveiligingIndex.php');
 ?>
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Licentiebeheer</title>
-    <link rel="stylesheet" type="text/css" href="assets/stylesheet/signin_stylesheet.css">
-    <!-- Bootstrap CSS importeren. -->
-    <link rel="stylesheet" type="text/css" href="assets/bootstrap-4.4.1-dist/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-</head>
+<title>Licentiebeheer - Inloggen</title>
+<?php include "includes/head.php"; ?>
+<link rel="stylesheet" type="text/css" href="assets/stylesheet/signin_stylesheet.css">
 <body class="text-center">
 <form class="form-signin" action="action/action.php?a=login" method="post">
 

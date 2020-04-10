@@ -1,3 +1,36 @@
 .licentieTable {
     cursor: pointer;
 }
+
+/* Stylesheet voor accountbeheer */
+tr, #accountbeheer {
+    cursor: default;
+}
+.text-center {
+    font-weight: normal;
+}
+.accountbeheerTerug {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px;
+    margin: 5px ;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    float: left;
+}
+.accountbeheerBijwerken{
+    border-color: #007bff;
+    background-color: white;
+    color: #007bff;
+    padding: 5px;
+    margin: 5px ;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    float: left;
+}
+.blur {
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
