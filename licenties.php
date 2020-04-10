@@ -207,7 +207,7 @@ $licentieSel = $licentie->fetch();
                         <thead>
                             <tr>
                                 <td colspan="2" class="text-center">
-                                    <b> Naam licentie * </b> <br>
+                                    <b> Naam licentie</b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['licentienaam'] ?> </text>
                                     <textarea class="form-control text-center LicentieEditField" name="LNaam" rows="1"
                                         required><?php echo $licentieSel['licentienaam'] ?></textarea>
@@ -274,7 +274,7 @@ $licentieSel = $licentie->fetch();
                 </form>
 
 
-                <form action="action/action.php?a=toevoegen" method='post' id="toevoegen" hidden>
+                <form action="action/action.php?a=toevoegen" method='post' id="toevoegen" >
                     <div class="row-">
                         <div class="form-group">
                             <textarea class="form-control text-center" name="LNaam" id="LicentieNaam" rows="1"
@@ -332,7 +332,7 @@ $licentieSel = $licentie->fetch();
                 var LicentieInfo = $(".LicentieInfo");
                 var LicentieEditField = $(".LicentieEditField");
 
-
+				$(hideElements);
                 $(hideElementsEdit);
 
                 $("#hide").click(function () {
