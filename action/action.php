@@ -82,10 +82,13 @@ function Login() {
 function Logout() {
 	global $conn;
 	$SessionID = $_COOKIE['SessionID'];
-	$conn->exec("DELETE FROM sessions WHERE cookie='$SessionID'");
+    $query = $conn->prepare("SELECT gebruikersnaam FROM sessions WHERE cookie='$SessionID'");
+    $query->execute();
+    $result = $query->fetch();
+    $sGebruikersnaam = $result['gebruikersnaam'];
+	$conn->exec("DELETE FROM sessions WHERE gebruikersnaam='$sGebruikersnaam'");
     unset($_COOKIE['SessionID']);
     setcookie('SessionID', null, -1, '/');
-    echo "gelukt";
     header("Location: /licentiebeheer/index.php");
     die();
 }

@@ -1,32 +1,6 @@
 <?php
 require('action/dbconnection.php');
-// Eerst beveiliging check
-if (isset($_COOKIE['SessionID'])) {
-    //TODO: beter checken naar potentiele injectie.
-    $session_ID_var = htmlspecialchars($_COOKIE['SessionID']);
-    //Checken of session bestaat dmv cookie hash.
-    $checkSessionQuery = "SELECT * FROM sessions WHERE cookie = '$session_ID_var'";
-    $checkSessionResult = $conn->prepare($checkSessionQuery);
-    $checkSessionResult->execute();
-    $number_of_rows = $checkSessionResult->fetchColumn();
-    // Checken of query is uitgevoerd && cookie in sessions tabel staat.
-    // Als cookie niet in database staat, redirecten naar index.php
-    if ($checkSessionQuery && $number_of_rows == 0) {
-        unset($_COOKIE['SessionID']);
-        setcookie('SessionID', null, -1, '/');
-        header("Location: index.php");
-        die();
-    }
-    else {
-        // Userdata verkrijgen.
-        $checkSessionResult->execute();
-        $userData = $checkSessionResult->fetch();
-    }
-}
-else {
-    header("Location: index.php");
-    die();
-}
+require('includes/beveiliging.php');
 
 $huidigeDatum = date("Y/m/d");
 $datumOver7Dagen = date('Y/m/d', strtotime($huidigeDatum. ' +7 days')). "<br>";
@@ -128,9 +102,8 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                 <div class="row">
                     <button type="button" class="btn btn-info" id="hide2" style="margin: 10px">Bijwerken</button>
 
-                    <form class="form-signin" action="action/action.php?a=delete" method="post" style="margin: 5px">
-                        <input type="submit" class="btn btn-danger" style="margin: 5px" value="Verwijderen"
-                            name="delete_button" />
+                    <form class="form-signin" id="verwijderLicentieForm" action="action/action.php?a=delete" method="post" style="margin: 5px">
+                        <input type="button" class="btn btn-danger" style="margin: 5px" value="Verwijder licentie" name="delete_button" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" />
                     </form>
                     <?php
                         if($aantalVerlopenLicenties > 0) {
@@ -278,7 +251,27 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
             </div>
         </div>
 
+        <!-- Bootstrap modal voor het verwijderen van licentie -->
 
+        <div class="modal fade" tabindex="-1" role="dialog" id="confirm-submit">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Licentie verwijderen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Weet je zeker dat je <b><?php echo $licentieSel['licentienaam'] ?></b> wil verwijderen?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="submit">Verwijderen</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuleren</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script>
             $(document).ready(function () {
@@ -326,9 +319,20 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                         $(LicentieEditField).show();
                     }
                 }
+
                 $('#LVerval').tooltip();
+            });
 
+            /*$('#submitBtn').click(function() {
+                /* when the button in the form, display the entered values in the modal
+                $('#lname').text($('#lastname').val());
+                $('#fname').text($('#firstname').val());
+            });*/
 
+            $('#submit').click(function(){
+                /* when the submit button in the modal is clicked, submit the form */
+                alert('submitting');
+                $('#verwijderLicentieForm').submit();
             });
 
         </script>
