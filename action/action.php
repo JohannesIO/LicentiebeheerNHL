@@ -118,8 +118,10 @@ function Toevoegen() {
 
 	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg, doelgroep, verlenguitleg) 
 	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg', '$doelgroep', '$verlenguitleg')");
-	echo "<script>alert('licentie toegevoegd')</script>";
-	header("Location: /licentiebeheer/licenties.php");
+	echo '<script type="text/javascript">
+		alert("Licentie Toegevoegd");
+		location="/licentiebeheer/accountbeheer.php";
+		</script>';
 	die();
 }
 
@@ -138,8 +140,10 @@ function DeleteLicentie() {
 	session_start();
 	$licentieid = $_SESSION['LicentieID'];
 	$conn->exec("DELETE FROM licenties WHERE licentieid=$licentieid");
-	echo "<script>alert('Licentie Verwijderd')</script>";
-	header("Location: /licentiebeheer/licenties.php");
+	echo '<script type="text/javascript">
+		alert("Licentie Verwijderd");
+		location="/licentiebeheer/accountbeheer.php";
+		</script>';
 	die();
 }
 
@@ -171,8 +175,10 @@ function Edit() {
     $stmt->execute();
 
 
-	echo "<script>alert('Licentie Bijgewerkt')</script>";
-	header("Location: /licentiebeheer/licenties.php");
+	echo '<script type="text/javascript">
+		alert("Licentie Bijgewerkt");
+		location="/licentiebeheer/accountbeheer.php";
+		</script>';
 	die();
 }
 
@@ -191,8 +197,10 @@ function Change() {
 	WHERE gebruikersnaam='$username'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
-	echo "<script>alert('Wachtwoord Bijgewerkt')</script>";
-	header("Location: /licentiebeheer/accountbeheer.php");
+	echo '<script type="text/javascript">
+		alert("Wachtwoord Bijgewerkt");
+		location="/licentiebeheer/accountbeheer.php";
+		</script>';
 	die();
 }
 
@@ -214,8 +222,10 @@ function AdminChange() {
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
 	}
-	echo "<script>alert('Admin Toegang Bijgewerkt')</script>";
-	header("Location: /licentiebeheer/accountbeheer.php");
+	echo '<script type="text/javascript">
+		alert("Admin Toegang Bijgewerkt");
+		location="/licentiebeheer/accountbeheer.php";
+		</script>';
 	die();
 }
 
@@ -224,21 +234,41 @@ function DeleteUser() {
 	$userid = $_POST['UserID'];
 	$conn->exec("DELETE FROM gebruikers WHERE id='$userid'");
 	
-	echo "<script>alert('Gebruiker Verwijderd')</script>";
-	header("Location: /licentiebeheer/accountbeheer.php");
+	echo '<script type="text/javascript">
+		alert("Gebruiker Verwijderd");
+		location="/licentiebeheer/accountbeheer.php";
+		</script>';
 	die();
 }
 
 function NewUser() {
 	global $conn;
+
 	$username = filter_var($_POST["Username"], FILTER_SANITIZE_STRING);
 	$email = filter_var($_POST["EMail"], FILTER_SANITIZE_EMAIL);
 	$newPass = $_POST["Password"];
 	$hash = password_hash($newPass, PASSWORD_DEFAULT);
 
-	$conn->exec("INSERT INTO gebruikers (gebruikersnaam, email, wachtwoord) 
-	VALUES ('$username', '$email', '$hash')");
-	echo "<script>alert('Gebruiker Toegevoegd')</script>";
-	header("Location: /licentiebeheer/accountbeheer.php");
+	$stmt = $conn->prepare("SELECT * FROM gebruikers WHERE gebruikersnaam=?");
+	$stmt->execute([$username]); 
+	$usercheck = $stmt->fetch();
+
+	$stmt = $conn->prepare("SELECT * FROM gebruikers WHERE email=?");
+	$stmt->execute([$email]); 
+	$emailcheck = $stmt->fetch();
+
+	if (!$usercheck && !$emailcheck) {
+		$conn->exec("INSERT INTO gebruikers (gebruikersnaam, email, wachtwoord) 
+		VALUES ('$username', '$email', '$hash')");
+		echo '<script type="text/javascript">
+		alert("Gebruiker Toegevoegd");
+		location="/licentiebeheer/accountbeheer.php";
+		</script>';
+	} else {
+		echo '<script type="text/javascript">
+		alert("Gebruiker bestaat al");
+		location="/licentiebeheer/accountbeheer.php";
+		</script>';
+	} 
 	die();
 }
