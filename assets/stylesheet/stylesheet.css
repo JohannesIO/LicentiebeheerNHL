@@ -1,11 +1,9 @@
-.licentieTable {
+#licentieTable {
     cursor: pointer;
+    
 }
 
 /* Stylesheet voor accountbeheer */
-tr, #accountbeheer {
-    cursor: default;
-}
 .text-center {
     font-weight: normal;
 }

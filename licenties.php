@@ -70,7 +70,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                         <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput" aria-describedby="helpId"
                                placeholder="Licenties zoeken..." />
                     </div>
-                    <tbody>
+                    <tbody style="cursor: pointer;">
                         <?php
                             $licenties = $conn->query("SELECT * FROM licenties");
                             while($row = $licenties->fetch()) {
@@ -325,15 +325,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                 $('#LVerval').tooltip();
             });
 
-            /*$('#submitBtn').click(function() {
-                /* when the button in the form, display the entered values in the modal
-                $('#lname').text($('#lastname').val());
-                $('#fname').text($('#firstname').val());
-            });*/
-
             $('#submit').click(function(){
-                /* when the submit button in the modal is clicked, submit the form */
-                alert('submitting');
                 $('#verwijderLicentieForm').submit();
             });
 

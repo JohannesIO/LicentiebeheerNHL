@@ -40,7 +40,7 @@
 
 			<h5 class="text-left">Wachtwoord Reset</h5>
 			<form method="post" action="action/action.php?a=change"  id="passwordForm">
-				<br><input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="Nieuw Wachtwoord" autocomplete="off">
+				<br><input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="Nieuw Wachtwoord" autocomplete="off" required>
 				<br><input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" value="Submit">
 			</form>
 
@@ -92,14 +92,9 @@
                     </thead>
                 </table>
             </div>
-			
-
-
-
         </div>
+
         <script>
-
-
             $(document).ready(function () {
                 
                 var Admin = $(".Admin");
