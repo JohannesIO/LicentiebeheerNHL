@@ -70,15 +70,15 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                         <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput" aria-describedby="helpId"
                                placeholder="Licenties zoeken..." />
                     </div>
-                    <tbody style="cursor: pointer; overflow-y: auto; height: 650px; display: block;">
+                    <tbody style="cursor: pointer; overflow-y: auto; height: 650px; display: block; max-width: 350px; min-width: 350px;">
                         <?php
                             $licenties = $conn->query("SELECT * FROM licenties");
                             while($row = $licenties->fetch()) {
                                 $licentieID = $row[0];
                                 $licentieNummer = $row[1];
                                 echo "
-                                            <tr class='licentieTable' id=" . $licentieID . ">
-                                            <td >" . $row[4] . "</form></td>
+                                            <tr class='licentieTable'  id=" . $licentieID . ">
+                                            <td style='max-width: 350px; min-width: 350px;'>" . $row[4] . "</form></td>
                                             </tr>                               
                                       
                                       <script>
