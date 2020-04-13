@@ -78,7 +78,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                 $licentieNummer = $row[1];
                                 echo "
                                             <tr class='licentieTable'  id=" . $licentieID . ">
-                                            <td style='max-width: 350px; min-width: 350px;'>" . $row[4] . "</form></td>
+                                            <td style='max-width: 340px; min-width: 340px;'>" . $row[4] . "</form></td>
                                             </tr>                               
                                       
                                       <script>
