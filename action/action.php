@@ -120,7 +120,7 @@ function Toevoegen() {
 	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg', '$doelgroep', '$verlenguitleg')");
 	echo '<script type="text/javascript">
 		alert("Licentie Toegevoegd");
-		location="/licentiebeheer/accountbeheer.php";
+		location="/licentiebeheer/licenties.php";
 		</script>';
 	die();
 }
@@ -142,7 +142,7 @@ function DeleteLicentie() {
 	$conn->exec("DELETE FROM licenties WHERE licentieid=$licentieid");
 	echo '<script type="text/javascript">
 		alert("Licentie Verwijderd");
-		location="/licentiebeheer/accountbeheer.php";
+		location="/licentiebeheer/licenties.php";
 		</script>';
 	die();
 }
@@ -177,7 +177,7 @@ function Edit() {
 
 	echo '<script type="text/javascript">
 		alert("Licentie Bijgewerkt");
-		location="/licentiebeheer/accountbeheer.php";
+		location="/licentiebeheer/licenties.php";
 		</script>';
 	die();
 }
@@ -222,10 +222,7 @@ function AdminChange() {
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();
 	}
-	echo '<script type="text/javascript">
-		alert("Admin Toegang Bijgewerkt");
-		location="/licentiebeheer/accountbeheer.php";
-		</script>';
+	header("Location: /licentiebeheer/accountbeheer.php");
 	die();
 }
 
