@@ -19,13 +19,24 @@ if($_GET['a'] == 'toevoegen'){
 if($_GET['a'] == 'select'){
     Select();
 }
-if($_GET['a'] == 'delete'){
-    Delete();
+if($_GET['a'] == 'deletelicentie'){
+    DeleteLicentie();
 }
 if($_GET['a'] == 'edit'){
     Edit();
 }
-
+if($_GET['a'] == 'change'){
+    Change();
+}
+if($_GET['a'] == 'adminchange'){
+	AdminChange();
+}
+if($_GET['a'] == 'deluser'){
+	DeleteUser();
+}
+if($_GET['a'] == 'newuser'){
+	NewUser();
+}
 
 function Login() {
     // $conn (databaseconnectie) importeren in deze functie, omdat hij buiten de scope staat
@@ -94,7 +105,7 @@ function Logout() {
 }
 
 function Toevoegen() {
-	require("dbconnection.php");
+	global $conn;
 
 	$licentienummer = $_POST['LCode'];
 	$vervaldatum = $_POST['LVerval'];
@@ -122,17 +133,18 @@ function Select() {
 	die();
 }
 
-function Delete() {
-	require("dbconnection.php");
+function DeleteLicentie() {
+	global $conn;
 	session_start();
 	$licentieid = $_SESSION['LicentieID'];
 	$conn->exec("DELETE FROM licenties WHERE licentieid=$licentieid");
+	echo "<script>alert('Licentie Verwijderd')</script>";
 	header("Location: /licentiebeheer/licenties.php");
 	die();
 }
 
 function Edit() {
-	require("dbconnection.php");
+	global $conn;
 	session_start();
 
 	$licentieid = $_SESSION['LicentieID'];
@@ -145,7 +157,7 @@ function Edit() {
 	$doelgroep = filter_var($_POST["LDoelGroep"], FILTER_SANITIZE_STRING);
 	$verlenguitleg = filter_var($_POST["LVerleng"], FILTER_SANITIZE_STRING);
 
-	$sql = "UPDATE Licenties SET 
+	$sql = "UPDATE licenties SET 
 	licentienummer='$licentienummer', 
 	vervaldatum='$vervaldatum', 
 	hoofdgebruiker='$hoofdgebruiker', 
@@ -161,5 +173,72 @@ function Edit() {
 
 	echo "<script>alert('Licentie Bijgewerkt')</script>";
 	header("Location: /licentiebeheer/licenties.php");
+	die();
+}
+
+function Change() {
+	global $conn;
+	$session_ID_var = htmlspecialchars($_COOKIE['SessionID']);
+	$checkSessionQuery = "SELECT * FROM sessions WHERE cookie = '$session_ID_var'";
+    $checkSessionResult = $conn->prepare($checkSessionQuery);
+	$checkSessionResult->execute();
+    $userData = $checkSessionResult->fetch();
+	$username = $userData['gebruikersnaam'];
+	$newPass = $_POST["password1"];
+	$hash = password_hash($newPass, PASSWORD_DEFAULT);
+	$sql = "UPDATE gebruikers SET 
+	wachtwoord='$hash'
+	WHERE gebruikersnaam='$username'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+	echo "<script>alert('Wachtwoord Bijgewerkt')</script>";
+	header("Location: /licentiebeheer/accountbeheer.php");
+	die();
+}
+
+function AdminChange() {
+	global $conn;
+	if(!empty($_POST['check'])){
+		$userID = $_POST['check'];
+		$sql = "UPDATE gebruikers SET 
+		isAdmin='1'
+		WHERE id='$userID'";
+		$stmt = $conn->prepare($sql);
+		$stmt->execute();
+	}
+	if(!empty($_POST['uncheck'])){
+		$userID = $_POST['uncheck'];
+		$sql = "UPDATE gebruikers SET 
+		isAdmin='0'
+		WHERE id='$userID'";
+		$stmt = $conn->prepare($sql);
+		$stmt->execute();
+	}
+	echo "<script>alert('Admin Toegang Bijgewerkt')</script>";
+	header("Location: /licentiebeheer/accountbeheer.php");
+	die();
+}
+
+function DeleteUser() {
+	global $conn;
+	$userid = $_POST['UserID'];
+	$conn->exec("DELETE FROM gebruikers WHERE id='$userid'");
+	
+	echo "<script>alert('Gebruiker Verwijderd')</script>";
+	header("Location: /licentiebeheer/accountbeheer.php");
+	die();
+}
+
+function NewUser() {
+	global $conn;
+	$username = filter_var($_POST["Username"], FILTER_SANITIZE_STRING);
+	$email = filter_var($_POST["EMail"], FILTER_SANITIZE_EMAIL);
+	$newPass = $_POST["Password"];
+	$hash = password_hash($newPass, PASSWORD_DEFAULT);
+
+	$conn->exec("INSERT INTO gebruikers (gebruikersnaam, email, wachtwoord) 
+	VALUES ('$username', '$email', '$hash')");
+	echo "<script>alert('Gebruiker Toegevoegd')</script>";
+	header("Location: /licentiebeheer/accountbeheer.php");
 	die();
 }

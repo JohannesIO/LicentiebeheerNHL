@@ -102,7 +102,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                 <div class="row">
                     <button type="button" class="btn btn-info" id="hide2" style="margin: 10px">Bijwerken</button>
 
-                    <form class="form-signin" id="verwijderLicentieForm" action="action/action.php?a=delete" method="post" style="margin: 5px">
+                    <form class="form-signin" id="verwijderLicentieForm" action="action/action.php?a=deletelicentie" method="post" style="margin: 5px">
                         <input type="button" class="btn btn-danger" style="margin: 5px" value="Verwijder licentie" name="delete_button" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" />
                     </form>
                     <?php
