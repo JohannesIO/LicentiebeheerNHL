@@ -59,7 +59,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <table class="table table-hover" id="licentieTable">
+                <table class="table table-hover" id="licentieTable" style="width: 350px;">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Licenties</th>
@@ -70,7 +70,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                         <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput" aria-describedby="helpId"
                                placeholder="Licenties zoeken..." />
                     </div>
-                    <tbody style="cursor: pointer;">
+                    <tbody style="cursor: pointer; overflow-y: auto; height: 650px; display: block;">
                         <?php
                             $licenties = $conn->query("SELECT * FROM licenties");
                             while($row = $licenties->fetch()) {
