@@ -9,8 +9,13 @@ $aantalVerlopenLicenties = 0;
 $licenties = $conn->query("SELECT vervaldatum, licentienaam  FROM licenties");
 foreach ($licenties as $item) {
     if ($item[0] < $datumOver7Dagen) {
-        $aantalVerlopenLicenties++;
-        array_push($binnenkortVerloopArray, $item[1]);
+        if($item[0] == "0000-00-00"){
+
+        }
+        else {
+            $aantalVerlopenLicenties++;
+            array_push($binnenkortVerloopArray, $item[1]);
+        }
     }
 }
 
@@ -233,7 +238,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="LCode" id="" rows="2" placeholder="Licentiecode"
-                                    required></textarea>
+                                    ></textarea>
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="LVerleng" id="" rows="4"
