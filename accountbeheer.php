@@ -18,12 +18,31 @@
 	$isadmin = $beheerder->fetch();
 
 	if ($isadmin['isAdmin'] == 0){
+		header("Location: /licentiebeheer/accountbeheeruser.php");
+		die();
 		echo"<script> var hideBool = true; </script>";
 	};
 	?>
     <script>$("#nav-acc").addClass( "active" );</script>
     <br />
         <div class="container">
+
+			<div class="Admin">
+			<h5 class="text-left">Nieuwe Gebruiker</h5>
+			<form method="post" action="action/action.php?a=newuser"  id="NewUserForm">
+				<br><input type="text" class="input-lg form-control" name="Username" id="Username" placeholder="Gebruikernaam" autocomplete="off">
+				<br><input type="text" class="input-lg form-control" name="EMail" id="EMail" placeholder="E-Mail" autocomplete="off">
+				<br><input type="password" class="input-lg form-control" name="Password" id="Password" placeholder="Wachtwoord" autocomplete="off">
+				<br><input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" value="Submit">
+			</form>
+			<br><br>
+			</div>
+
+			<h5 class="text-left">Wachtwoord Reset</h5>
+			<form method="post" action="action/action.php?a=change"  id="passwordForm">
+				<br><input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="Nieuw Wachtwoord" autocomplete="off">
+				<br><input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" value="Submit">
+			</form>
 
             <div class="col-sm Admin">
                 <table class="table table-bordered ">
@@ -73,22 +92,7 @@
                     </thead>
                 </table>
             </div>
-			<div class="Admin">
-			<h5 class="text-left">Nieuwe Gebruiker</h5>
-			<form method="post" action="action/action.php?a=newuser"  id="NewUserForm">
-				<br><input type="text" class="input-lg form-control" name="Username" id="Username" placeholder="Gebruikernaam" autocomplete="off">
-				<br><input type="text" class="input-lg form-control" name="EMail" id="EMail" placeholder="E-Mail" autocomplete="off">
-				<br><input type="password" class="input-lg form-control" name="Password" id="Password" placeholder="Wachtwoord" autocomplete="off">
-				<br><input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" value="Submit">
-			</form>
-			<br><br>
-			</div>
-
-			<h5 class="text-left">Wachtwoord Reset</h5>
-			<form method="post" action="action/action.php?a=change"  id="passwordForm">
-				<br><input type="password" class="input-lg form-control" name="password1" id="password1" placeholder="Nieuw Wachtwoord" autocomplete="off">
-				<br><input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" value="Submit">
-			</form>
+			
 
 
 
