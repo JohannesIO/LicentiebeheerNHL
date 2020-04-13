@@ -3,7 +3,7 @@ require('action/dbconnection.php');
 require('includes/beveiliging.php');
 
 $huidigeDatum = date("Y/m/d");
-$datumOver7Dagen = date('Y/m/d', strtotime($huidigeDatum. ' +7 days')). "<br>";
+$datumOver7Dagen = date('Y-m-d', strtotime($huidigeDatum. ' +7 days')). "<br>";
 $binnenkortVerloopArray = array();
 $aantalVerlopenLicenties = 0;
 $licenties = $conn->query("SELECT vervaldatum, licentienaam  FROM licenties");
@@ -123,6 +123,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                     }
 
                                 ?>
+
                             </div>
                         </div>
                     <?php
