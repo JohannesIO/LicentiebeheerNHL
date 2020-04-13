@@ -294,12 +294,14 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                     if (hideBool == true) {
                         $(toevoegen).hide();
                         $(licentieDisplay).show();
-
                     }
                     else {
                         $(licentieDisplay).hide();
                         $(toevoegen).show();
                         $("#LicentieNaam").focus();
+						
+                        $(LicentieInfo).show();
+                        $(LicentieEditField).hide();
                     }
                 }
 

@@ -72,12 +72,8 @@
 
                     </thead>
                 </table>
-                <a href="licenties.php"><button class="accountbeheerTerug">terug</button></a>
-                <button class="accountbeheerBijwerken">bijwerken?</button>
-                <button class="accountbeheerTerug" style="width: auto">Nieuwe beheerder toevoegen</button>
             </div>
-			<br><br>
-
+			<div class="Admin">
 			<h5 class="text-left">Nieuwe Gebruiker</h5>
 			<form method="post" action="action/action.php?a=newuser"  id="NewUserForm">
 				<br><input type="text" class="input-lg form-control" name="Username" id="Username" placeholder="Gebruikernaam" autocomplete="off">
@@ -86,6 +82,7 @@
 				<br><input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" value="Submit">
 			</form>
 			<br><br>
+			</div>
 
 			<h5 class="text-left">Wachtwoord Reset</h5>
 			<form method="post" action="action/action.php?a=change"  id="passwordForm">
