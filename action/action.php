@@ -37,7 +37,6 @@ if($_GET['a'] == 'deluser'){
 if($_GET['a'] == 'newuser'){
 	NewUser();
 }
-
 function Login() {
     // $conn (databaseconnectie) importeren in deze functie, omdat hij buiten de scope staat
     global $conn;
@@ -107,7 +106,7 @@ function Logout() {
 function Toevoegen() {
 	global $conn;
 
-	$licentienummer = $_POST['LCode'];
+	$licentiecode = $_POST['LCode'];
 	$vervaldatum = $_POST['LVerval'];
 	$hoofdgebruiker = filter_var($_POST["LHGebr"], FILTER_SANITIZE_STRING);
 	$licentienaam = filter_var($_POST["LNaam"], FILTER_SANITIZE_STRING);
@@ -116,8 +115,8 @@ function Toevoegen() {
 	$doelgroep = filter_var($_POST["LDoelGroep"], FILTER_SANITIZE_STRING);
 	$verlenguitleg = filter_var($_POST["LVerleng"], FILTER_SANITIZE_STRING);
 
-	$conn->exec("INSERT INTO licenties (licentienummer, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg, doelgroep, verlenguitleg) 
-	VALUES ('$licentienummer', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg', '$doelgroep', '$verlenguitleg')");
+	$conn->exec("INSERT INTO licenties (licentiecode, vervaldatum, hoofdgebruiker, licentienaam, licentiebeschrijving, installatieuitleg, doelgroep, verlenguitleg) 
+	VALUES ('$licentiecode', '$vervaldatum', '$hoofdgebruiker', '$licentienaam', '$licentiebeschrijving', '$installatieuitleg', '$doelgroep', '$verlenguitleg')");
 	echo '<script type="text/javascript">
 		alert("Licentie Toegevoegd");
 		location="/licentiebeheer/licenties.php";
@@ -157,7 +156,7 @@ function Edit() {
 	session_start();
 
 	$licentieid = $_SESSION['LicentieID'];
-	$licentienummer = $_POST['LCode'];
+	$licentiecode = $_POST['LCode'];
 	$vervaldatum = $_POST['LVerval'];
 	$hoofdgebruiker = filter_var($_POST["LHGebr"], FILTER_SANITIZE_STRING);
 	$licentienaam = filter_var($_POST["LNaam"], FILTER_SANITIZE_STRING);
@@ -167,7 +166,7 @@ function Edit() {
 	$verlenguitleg = filter_var($_POST["LVerleng"], FILTER_SANITIZE_STRING);
 
 	$sql = "UPDATE licenties SET 
-	licentienummer='$licentienummer', 
+	licentiecode='$licentiecode', 
 	vervaldatum='$vervaldatum', 
 	hoofdgebruiker='$hoofdgebruiker', 
 	licentienaam='$licentienaam', 

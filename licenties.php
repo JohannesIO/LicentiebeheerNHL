@@ -75,7 +75,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                         <input type="text" class="form-control" onkeyup="zoekFunctie()" name="" id="zoekenInput" aria-describedby="helpId"
                                placeholder="Licenties zoeken..." />
                     </div>
-                    <tbody style="cursor: pointer; overflow-y: auto; height: 650px; display: block; max-width: 350px; min-width: 350px;">
+                    <tbody style="cursor: pointer; overflow-y: auto; height: 630px; display: block; max-width: 350px; min-width: 350px;">
                         <?php
                         $licenties = $conn->query("SELECT * FROM licenties ORDER BY licentienaam");
                         while($row = $licenties->fetch()) {
@@ -101,6 +101,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                 <div class="row">
                     <button type="button" class="btn btn-success btn-block" id="hide" style="margin: 5px">Licentie
                         toevoegen in/uitklappen</button>
+                    <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#exampleModal" id="exporteerCSVButton" style="margin: 5px">Licenties exporteren als .csv</button>
                 </div>
             </div>
             <div class="col-sm-8">
@@ -123,7 +124,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                 <?php
                                     $i = 0;
                                     while ($i < $binnenkortVerloopArrayLengte) {
-                                        echo "<button class='dropdown-item' type='button'>" . $binnenkortVerloopArray[$i] . "</button>";
+                                        echo "<button class='dropdown-item' type='button' disabled>" . $binnenkortVerloopArray[$i] . "</button>";
                                         $i++;
                                     }
 
@@ -174,7 +175,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                     <b> Licentiecode </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['licentiecode'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LCode" rows="1"
-                                        hidden><?php echo $licentieSel['licentienummer'] ?></textarea>
+                                        hidden><?php echo $licentieSel['licentiecode'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -279,6 +280,33 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
             </div>
         </div>
 
+        <!-- Bootstrap modal voor het exporteren van licenties -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Licenties exporteren als .csv</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <b>Instructies.</b><br /><br />
+                        <b>1.</b> Zet de .csv ergens op je computer waar je hem kan vinden.<br />
+                        <b>2.</b> Open een nieuw excel bestand.<br />
+                        <b>3.</b> In excel, druk boven in de balk op "Gegevens".<br />
+                        <b>4.</b> Druk dan op "Uit tekst/CSV".<br />
+                        <b>5.</b> Selecteer dan het eerder gedownloade bestand en druk op 'Importeren'.<br />
+                        <b>6.</b> Druk dan op 'Laden'.<br />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten.</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='action/exporteerLicenties.php';">Begrepen, download .csv</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             $(document).ready(function () {
                 var hideBool = true;
@@ -334,7 +362,6 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
             $('#submit').click(function(){
                 $('#verwijderLicentieForm').submit();
             });
-
         </script>
 </body>
 
