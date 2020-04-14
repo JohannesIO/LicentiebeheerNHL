@@ -145,21 +145,21 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                     <b> Naam licentie</b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['licentienaam'] ?> </text>
                                     <textarea class="form-control text-center LicentieEditField" name="LNaam" rows="1"
-                                        required><?php echo $licentieSel['licentienaam'] ?></textarea>
+                                        required hidden><?php echo $licentieSel['licentienaam'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <b> Doelgroep </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['doelgroep'] ?> </text>
-                                    <textarea class="form-control text-left LicentieEditField" name="LDoelGroep"
-                                        rows="1" ><?php echo $licentieSel['doelgroep'] ?></textarea>
+                                    <textarea class="form-control text-left LicentieEditField" name="LDoelGroep" rows="1" 
+										hidden><?php echo $licentieSel['doelgroep'] ?></textarea>
                                 </td>
                                 <td>
                                     <b> Hoofdgebruiker </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['hoofdgebruiker'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LHGebr" rows="1"
-                                        ><?php echo $licentieSel['hoofdgebruiker'] ?></textarea>
+                                        hidden><?php echo $licentieSel['hoofdgebruiker'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -168,13 +168,13 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                     <text class="LicentieInfo"> <?php echo $licentieSel['licentiebeschrijving'] ?>
                                     </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LBeschr" rows="4"
-                                        ><?php echo $licentieSel['licentiebeschrijving'] ?></textarea>
+                                        hidden><?php echo $licentieSel['licentiebeschrijving'] ?></textarea>
                                 </td>
                                 <td>
                                     <b> Licentiecode </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['licentienummer'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LCode" rows="1"
-                                        ><?php echo $licentieSel['licentienummer'] ?></textarea>
+                                        hidden><?php echo $licentieSel['licentienummer'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -182,7 +182,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                     <b> Verleng Uitleg </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['verlenguitleg'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LVerleng" rows="1"
-                                        ><?php echo $licentieSel['verlenguitleg'] ?></textarea>
+                                        hidden><?php echo $licentieSel['verlenguitleg'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -190,13 +190,13 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                     <b> Vervaldatum </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['vervaldatum'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LVerval" rows="1"
-                                        ><?php echo $licentieSel['vervaldatum'] ?></textarea>
+                                        hidden><?php echo $licentieSel['vervaldatum'] ?></textarea>
                                 </td>
                                 <td>
                                     <b> Installatie Uitleg </b> <br>
                                     <text class="LicentieInfo"> <?php echo $licentieSel['installatieuitleg'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LInstall" rows="1"
-                                        ><?php echo $licentieSel['installatieuitleg'] ?></textarea>
+                                        hidden><?php echo $licentieSel['installatieuitleg'] ?></textarea>
                                 </td>
                             </tr>
 
@@ -205,11 +205,11 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                         </tbody>
                     </table>
                     <button type="submit" form="edit" name="Edit" value="Edit"
-                        class="btn btn-primary LicentieEditField">Bijwerking Vaststellen</button>
+                        class="btn btn-primary LicentieEditField" hidden>Bijwerking Vaststellen</button>
                 </form>
 
 
-                <form action="action/action.php?a=toevoegen" method='post' id="toevoegen" >
+                <form action="action/action.php?a=toevoegen" method='post' id="toevoegen" hidden>
                     <div class="row-">
                         <div class="form-group">
                             <textarea class="form-control text-center" name="LNaam" id="LicentieNaam" rows="1"
@@ -298,16 +298,16 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
 
                 function hideElements() {
                     if (hideBool == true) {
-                        $(toevoegen).hide();
-                        $(licentieDisplay).show();
+                        $(toevoegen).attr("hidden",true);
+                        $(licentieDisplay).removeAttr("hidden");
                     }
                     else {
-                        $(licentieDisplay).hide();
-                        $(toevoegen).show();
+                        $(licentieDisplay).attr("hidden",true);
+                        $(toevoegen).removeAttr("hidden");
                         $("#LicentieNaam").focus();
 						
                         $(LicentieInfo).show();
-                        $(LicentieEditField).hide();
+                        $(LicentieEditField).attr("hidden",true);
                     }
                 }
 
@@ -319,12 +319,12 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
 
                 function hideElementsEdit() {
                     if (hideBoolEdit == true) {
-                        $(LicentieInfo).show();
-                        $(LicentieEditField).hide();
+                        $(LicentieInfo).removeAttr("hidden");
+                        $(LicentieEditField).attr("hidden",true);
                     }
                     else {
-                        $(LicentieInfo).hide();
-                        $(LicentieEditField).show();
+                        $(LicentieInfo).attr("hidden",true);
+                        $(LicentieEditField).removeAttr("hidden");
                     }
                 }
 

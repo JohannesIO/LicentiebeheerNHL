@@ -140,6 +140,11 @@ function DeleteLicentie() {
 	session_start();
 	$licentieid = $_SESSION['LicentieID'];
 	$conn->exec("DELETE FROM licenties WHERE licentieid=$licentieid");
+
+	$licentieMin = $conn->query("SELECT MIN(licentieid) AS LowLicentie FROM licenties");
+    $licentieMin = $licentieMin->fetch();
+    $_SESSION['LicentieID'] = $licentieMin['LowLicentie'];
+
 	echo '<script type="text/javascript">
 		alert("Licentie Verwijderd");
 		location="/licentiebeheer/licenties.php";
