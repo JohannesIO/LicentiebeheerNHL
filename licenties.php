@@ -306,7 +306,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                         $(toevoegen).removeAttr("hidden");
                         $("#LicentieNaam").focus();
 						
-                        $(LicentieInfo).show();
+                        $(LicentieInfo).removeAttr("hidden");
                         $(LicentieEditField).attr("hidden",true);
                     }
                 }
