@@ -146,6 +146,8 @@ fabric.properties
 # Markdown Navigator plugin
 
 ### VisualStudioCode ###
+.vs
+.vs/*
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
