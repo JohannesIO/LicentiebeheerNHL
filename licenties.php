@@ -77,23 +77,23 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                     </div>
                     <tbody style="cursor: pointer; overflow-y: auto; height: 650px; display: block; max-width: 350px; min-width: 350px;">
                         <?php
-                            $licenties = $conn->query("SELECT * FROM licenties");
-                            while($row = $licenties->fetch()) {
-                                $licentieID = $row[0];
-                                $licentieNummer = $row[1];
-                                echo "
-                                            <tr class='licentieTable'  id=" . $licentieID . ">
-                                            <td style='max-width: 340px; min-width: 340px;'>" . $row[4] . "</form></td>
-                                            </tr>                               
-                                      
-                                      <script>
-                                        $('#" . $licentieID . "').click(function () {
-                                            $.get('action/action.php?a=select&licentieID=" . $licentieID . "')
-                                            location.reload();
-                                        });
-                                    </script>      
-                                     ";
-                            }
+                        $licenties = $conn->query("SELECT * FROM licenties ORDER BY licentienaam");
+                        while($row = $licenties->fetch()) {
+                            $licentieID = $row['licentieid'];
+                            $licentieCode = $row['licentiecode'];
+                            echo "
+                                                <tr class='licentieTable'  id=" . $licentieID . ">
+                                                <td style='max-width: 340px; min-width: 340px;'>" . $row['licentienaam'] . "</form></td>
+                                                </tr>                               
+                                          
+                                          <script>
+                                            $('#" . $licentieID . "').click(function () {
+                                                $.get('action/action.php?a=select&licentieID=" . $licentieID . "')
+                                                location.reload();
+                                            });
+                                        </script>      
+                                         ";
+                        }
                         ?>
                     </tbody>
                 </table>
@@ -172,7 +172,7 @@ $binnenkortVerloopArrayLengte = count($binnenkortVerloopArray);
                                 </td>
                                 <td>
                                     <b> Licentiecode </b> <br>
-                                    <text class="LicentieInfo"> <?php echo $licentieSel['licentienummer'] ?> </text>
+                                    <text class="LicentieInfo"> <?php echo $licentieSel['licentiecode'] ?> </text>
                                     <textarea class="form-control text-left LicentieEditField" name="LCode" rows="1"
                                         hidden><?php echo $licentieSel['licentienummer'] ?></textarea>
                                 </td>
