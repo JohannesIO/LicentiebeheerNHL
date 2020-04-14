@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 14/04/2020 13:00:22
+ Date: 14/04/2020 14:49:10
 */
 
 SET NAMES utf8mb4;
@@ -36,7 +36,7 @@ CREATE TABLE `gebruikers`  (
 DROP TABLE IF EXISTS `licenties`;
 CREATE TABLE `licenties`  (
   `licentieid` int(11) NOT NULL AUTO_INCREMENT,
-  `licentiecode` int(255) NOT NULL,
+  `licentiecode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `licentienaam` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `licentiebeschrijving` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `hoofdgebruiker` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
